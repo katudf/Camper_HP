@@ -1,12 +1,23 @@
-// js/chat-loader.js (パスを相対パスに修正した最終版)
+// js/chat-loader.js (修正版)
 (function() {
     document.addEventListener('DOMContentLoaded', function() {
+
+        // --- 修正点 1: 動的に基準パスを取得 ---
+        // このスクリプト自身のパスから、サイトのルートを基準にしたパスを生成します。
+        const loaderScript = document.querySelector('script[src*="js/chat-loader.js"]');
+        let basePath = '';
+        if (loaderScript) {
+            // 例: srcが "../js/chat-loader.js" の場合、"../" を basePath とする
+            const src = loaderScript.getAttribute('src');
+            basePath = src.substring(0, src.indexOf('js/chat-loader.js'));
+        }
+
 
         // 1. CSSの読み込み
         const cssLink = document.createElement('link');
         cssLink.rel = 'stylesheet';
-        // ▼▼▼ パスの先頭の / を削除 ▼▼▼
-        cssLink.href = 'wp-content/themes/kpi/css/chat-widget.css';
+        // --- 修正点 2: パスの先頭に取得した基準パスを追加 ---
+        cssLink.href = basePath + 'wp-content/themes/kpi/css/chat-widget.css';
         document.head.appendChild(cssLink);
 
         // 2. DOMPurifyライブラリの読み込み
@@ -47,8 +58,8 @@
         // 5. チャットの動作ロジック（chat-widget.js）を読み込む
         purifyScript.onload = function() {
             const widgetScript = document.createElement('script');
-            // ▼▼▼ パスの先頭の / を削除 ▼▼▼
-            widgetScript.src = 'js/chat-widget.js';
+            // --- 修正点 3: パスの先頭に取得した基準パスを追加 ---
+            widgetScript.src = basePath + 'js/chat-widget.js';
             
             widgetScript.onload = function() {
                 // 既に存在する関数を呼び出す
@@ -64,7 +75,7 @@
              console.error("DOMPurify could not be loaded from CDN.");
              // DOMPurifyがなくても、widgetScriptの読み込みは試みる
              const widgetScript = document.createElement('script');
-             widgetScript.src = 'js/chat-widget.js';
+             widgetScript.src = basePath + 'js/chat-widget.js';
              widgetScript.onload = function() {
                 if (typeof initializeChatWidget === 'function') {
                     initializeChatWidget();
