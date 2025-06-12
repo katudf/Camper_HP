@@ -85,15 +85,14 @@
 
 /* メッセージ表示エリア */
 #chat-widget-messages {
-    flex-grow: 1;
-    /* 高さを親要素からヘッダーと入力欄の分を引いた値に、より厳密に設定 */
-    height: calc(100% - 95px); /* ★★★ 変更点 ★★★ */
+    flex-grow: 1; /* ★★★ 修正: 高さを固定せず、柔軟に領域を確保するように戻します */
+    min-height: 0;  /* Flexboxでスクロールを正しく機能させるために残します */
     padding: 15px;
-    overflow-y: auto !important; /* ★★★ !importantを追加して、強制的にスクロールを有効化 ★★★ */
+    overflow-y: auto !important; /* 他のCSSとの競合を避けるため、!importantは残します */
     background-color: #f9f9f9;
     display: flex;
     flex-direction: column;
-    min-height: 0; 
+    /* height: calc(...) の行は完全に削除します */
 }
 /* メッセージ入力エリア */
 #chat-widget-input-container {
