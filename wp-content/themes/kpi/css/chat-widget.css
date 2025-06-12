@@ -160,17 +160,17 @@
     font-style: italic;
 }
 /* 動的な思考中メッセージのスタイル */
-.ai-message .dot {
+.bot-message .dot {
     display: inline-block;
     animation: blink 1.4s infinite;
     animation-fill-mode: both;
 }
 
-.ai-message .dot:nth-of-type(2) {
+.bot-message .dot:nth-of-type(2) {
     animation-delay: 0.2s;
 }
 
-.ai-message .dot:nth-of-type(3) {
+.bot-message .dot:nth-of-type(3) {
     animation-delay: 0.4s;
 }
 
