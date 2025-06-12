@@ -147,6 +147,17 @@ function initializeChatWidget() {
         const thinkingHTML = 'AIが思考中です<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>';
         const loadingMessageElement = addMessage(thinkingHTML, 'bot', true, true); 
         
+        // ▼▼▼ 3秒後にメッセージを変更するタイマーを設定 ▼▼▼
+        const timeoutId = setTimeout(() => {
+            // loadingMessageElementがまだ画面に存在する場合のみ実行
+            if (document.getElementById(loadingMessageElement.id)) {
+                const pElement = loadingMessageElement.querySelector('p');
+                if (pElement) {
+                    pElement.innerHTML = 'サーバーに接続しています、30~50秒お待ちいただく場合があります...';
+                }
+            }
+        }, 3000); // 3000ミリ秒 = 3秒
+
         try {
             const response = await fetch(`${SERVER_URL}/api/chat`, {
                 method: 'POST',
@@ -159,16 +170,17 @@ function initializeChatWidget() {
             }
             const data = await response.json();
             removeMessage(loadingMessageElement.id);
-            addMessage(data.reply, 'bot', false, false); // Botからの新規返信はisHTML=falseでリンクを自動生成させる
+            addMessage(data.reply, 'bot', false, false); 
         } catch (error) {
             console.error('通信エラー:', error);
             removeMessage(loadingMessageElement.id);
             addMessage('申し訳ありません、通信エラーが発生しました。', 'bot', false, false);
         } finally {
+            // ▼▼▼ 応答が返ってきたら、必ずタイマーを解除 ▼▼▼
+            clearTimeout(timeoutId);
             saveState();
         }
     }
-
 
     // --- UI操作（開閉・新規）---
     if (toggleButton) {
