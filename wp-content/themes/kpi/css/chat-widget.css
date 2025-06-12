@@ -182,3 +182,17 @@
         opacity: 1;
     }
 }
+
+#chat-widget-header {
+  /* バージョン表示を絶対位置で配置するための基準にする */
+  position: relative;
+}
+
+#prompt-version-display {
+  position: absolute;
+  bottom: 4px;
+  left: 15px;
+  font-size: 10px;
+  font-weight: normal;
+  color: rgba(255, 255, 255, 0.7); /* 少し透明な白 */
+}

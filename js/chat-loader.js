@@ -68,11 +68,12 @@
             <div id="chat-widget-container" class="hidden">
                 <div id="chat-widget-header">
                     <span id="chat-widget-title">AIに相談</span>
-                    <div class="chat-header-buttons">
+                    <span id="prompt-version-display"></span>  <div class="chat-header-buttons">
                         <button id="chat-widget-new-button">新規</button>
                         <button id="chat-widget-close-button">×</button>
                     </div>
                 </div>
+            <div id="chat-widget-content">
                 <div id="chat-widget-messages"></div>
                 <div id="chat-widget-input-container">
                     <input type="text" id="chat-widget-input" placeholder="メッセージを入力...">

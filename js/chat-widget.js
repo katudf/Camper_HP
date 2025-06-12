@@ -5,6 +5,28 @@ function initializeChatWidget() {
     if (window.chatWidgetInitialized) return;
     window.chatWidgetInitialized = true;
 
+    // APIサーバーのURL (早期に定義して全体で共有)
+    const SERVER_URL = 'https://camper-chatbot.onrender.com';
+
+    // バージョン情報を非同期で取得して表示する
+    async function fetchAndDisplayVersion() {
+        try {
+            const versionDisplay = document.getElementById('prompt-version-display');
+            if (!versionDisplay) return;
+
+            const response = await fetch(`${SERVER_URL}/api/get_active_prompt_version`);
+            if (response.ok) {
+                const data = await response.json();
+                if (data.version) {
+                    versionDisplay.textContent = `v${data.version}`;
+                }
+            }
+        } catch (error) {
+            console.error('Failed to fetch prompt version:', error);
+        }
+    }
+    fetchAndDisplayVersion();
+
     // --- 要素の取得 ---
     const toggleButton = document.getElementById('ai-chat-toggle-button');
     const chatContainer = document.getElementById('chat-widget-container');
@@ -15,7 +37,6 @@ function initializeChatWidget() {
     const messagesContainer = document.getElementById('chat-widget-messages');
     const chatInput = document.getElementById('chat-widget-input');
     const sendButton = document.getElementById('chat-widget-send-button');
-    const SERVER_URL = 'https://camper-chatbot.onrender.com';
 
     // ▼▼▼ 状態の保存・復元、メッセージ追加・削除の関数群をここに集約 ▼▼▼
 
