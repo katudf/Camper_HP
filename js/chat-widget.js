@@ -59,22 +59,20 @@ function initializeChatWidget() {
 // --- UI操作（開閉・新規）---
     if (toggleButton) {
         toggleButton.addEventListener('click', () => {
-            // もしチャットウィンドウが非表示('hidden'クラスを持つ)の場合だけ、処理を実行する
-            if (chatContainer.classList.contains('hidden')) {
-                // ▼▼▼ 位置とサイズをリセットする処理 ▼▼▼
-                chatContainer.style.top = 'auto';
-                chatContainer.style.left = 'auto';
-                chatContainer.style.right = '20px';
-                chatContainer.style.bottom = '20px';
-                chatContainer.style.height = '450px'; // 初期サイズ
+            // 1. クリックされるたびに、位置とサイズをリセットする
+            chatContainer.style.top = 'auto';
+            chatContainer.style.left = 'auto';
+            chatContainer.style.right = '20px';
+            chatContainer.style.bottom = '20px';
+            chatContainer.style.height = '450px'; // 初期サイズ
 
-                // ウィンドウを表示する
+            // 2. もしウィンドウが非表示だったら、表示する
+            if (chatContainer.classList.contains('hidden')) {
                 chatContainer.classList.remove('hidden');
-                
-                // 変更後の状態を保存
-                saveState();
             }
-            // ウィンドウが表示されている場合は、何もしない
+            
+            // 3. 変更後の状態を保存
+            saveState();
         });
     }
     if (widgetCloseButton) {
