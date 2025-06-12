@@ -159,3 +159,26 @@
     opacity: 0.7;
     font-style: italic;
 }
+/* 動的な思考中メッセージのスタイル */
+.ai-message .dot {
+    display: inline-block;
+    animation: blink 1.4s infinite;
+    animation-fill-mode: both;
+}
+
+.ai-message .dot:nth-of-type(2) {
+    animation-delay: 0.2s;
+}
+
+.ai-message .dot:nth-of-type(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+    0%, 80%, 100% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+}

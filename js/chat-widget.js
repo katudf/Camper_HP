@@ -176,7 +176,9 @@ function initializeChatWidget() {
         sendButton.disabled = true;
         addMessage(messageText, 'user');
         saveState();
-        const loadingMessageElement = addMessage('考えています...初回の質問には時間が掛かる場合があります。', 'bot', true);
+        const thinkingHTML = 'AIが思考中です<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>';
+        // HTMLを渡して思考中メッセージを生成
+        const loadingMessageElement = addMessage(thinkingHTML, 'bot', true);
         try {
             const response = await fetch(`${SERVER_URL}/api/chat`, {
                 method: 'POST',
@@ -199,32 +201,40 @@ function initializeChatWidget() {
         }
     }
 
-    function addMessage(text, sender, isLoading = false) {
-        const messageId = `msg-${Date.now()}-${Math.random()}`;
-        const messageElement = document.createElement('div');
-        messageElement.id = messageId;
-        messageElement.classList.add('chat-widget-message', `${sender}-message`);
-        const pElement = document.createElement('p');
-        if (isLoading) {
-            messageElement.classList.add('loading-message');
-            pElement.textContent = text;
-        } else if (sender === 'bot') {
-            const htmlWithLinks = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-            if (typeof DOMPurify !== 'undefined') {
-                pElement.innerHTML = DOMPurify.sanitize(htmlWithLinks, { ADD_ATTR: ['target'] });
-            } else {
-                pElement.innerHTML = htmlWithLinks;
-            }
+function addMessage(text, sender, isLoading = false) {
+    const messageId = `msg-${Date.now()}-${Math.random()}`;
+    const messageElement = document.createElement('div');
+    messageElement.id = messageId;
+    messageElement.classList.add('chat-widget-message', `${sender}-message`);
+    const pElement = document.createElement('p');
+
+    if (isLoading) {
+        messageElement.classList.add('loading-message');
+        // ▼▼▼ ここを修正 ▼▼▼
+        // 思考中メッセージ(HTML)をサニタイズして設定
+        if (typeof DOMPurify !== 'undefined') {
+            pElement.innerHTML = DOMPurify.sanitize(text);
         } else {
-            pElement.textContent = text;
+            pElement.innerHTML = text;
         }
-        messageElement.appendChild(pElement);
-        if (messagesContainer) {
-            messagesContainer.appendChild(messageElement);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    } else if (sender === 'bot') {
+        const htmlWithLinks = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+        if (typeof DOMPurify !== 'undefined') {
+            pElement.innerHTML = DOMPurify.sanitize(htmlWithLinks, { ADD_ATTR: ['target'] });
+        } else {
+            pElement.innerHTML = htmlWithLinks;
         }
-        return messageElement;
+    } else {
+        pElement.textContent = text;
     }
+
+    messageElement.appendChild(pElement);
+    if (messagesContainer) {
+        messagesContainer.appendChild(messageElement);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    return messageElement;
+}
 
     function removeMessage(messageId) {
         const messageToRemove = document.getElementById(messageId);
