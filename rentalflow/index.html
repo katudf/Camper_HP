@@ -295,6 +295,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         reserveButton.style.display = 'none'; // 要素を非表示にする
     });
 </script>
+<!-- チャットボット設置エリア -->
+<div id="chatbot-area"></div>
+<script src="../js/chat-widget.js" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.ChatWidget && typeof window.ChatWidget.init === 'function') {
+      window.ChatWidget.init({ container: '#chatbot-area' });
+    }
+  });
+</script>
+<script src="../js/chat-loader.js" defer></script>
 </body>
 
 <!-- Mirrored from kpi-campingcar.com/rentalflow/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Jun 2025 02:54:38 GMT -->
