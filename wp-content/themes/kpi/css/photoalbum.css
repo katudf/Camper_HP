@@ -1,0 +1,51 @@
+#photo_album article {
+	width: 1236px;
+	margin: 0 auto;
+}
+
+#photo_album ul {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 60px;
+}
+
+#photo_album ul li {
+	width: 264px;
+/* 	height: 197px; */
+/* 	padding: 28px 26px; */
+	box-sizing: border-box;
+	background: url('../images/common/bg_album.webp') no-repeat;
+	position: relative;
+}
+
+#photo_album ul li a.photo1 {
+	display: block;
+/* 	width: 100%; */
+/* 	height: 100%; */
+	width: 212px;
+	height: 141px;
+ 	padding: 28px 26px;
+}
+
+#photo_album ul li a.photo1 img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.kakudai {
+	width: 24px;
+	height: 24px;
+	display: block;
+	position: absolute;
+	top: 150px;
+	right: 20px;
+}
+
+#photo_album ul li figure figcaption{
+		line-height: 1.3;
+		padding: 10px 5px;
+		text-align: justify;
+	}

@@ -1,0 +1,36 @@
+main section{
+	max-width:1140px;
+	margin:0 auto 150px;
+}
+main section dl{
+	display:flex;
+	border-top:2px solid #000;
+	padding:20px 0;
+}
+main section dl:last-child{
+	border-bottom:2px solid #000;
+}
+main section dl dt{
+	width:250px;
+	flex:none;
+	color:#407008;
+	font-family: "fot-chiaro-std", sans-serif;
+	font-weight: 700;
+	font-style: normal;
+	text-align:center;
+	position:relative;
+}
+main section dl dt:after{
+	content:"";
+	width:2px;
+	height:20px;
+	background:#000;
+	display:block;
+	top:-20px;
+	right:20px;
+	position:absolute;
+}
+main section dl dd{
+	width:calc(100% - 250px);
+	flex:none;
+}

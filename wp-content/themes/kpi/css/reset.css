@@ -1,0 +1,154 @@
+/*
+html5doctor.com Reset Stylesheet
+v1.4
+2009-07-27
+Author: Richard Clark - http://richclarkdesign.com
+*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, dialog, figure, footer, header,
+hgroup, menu, nav, section,
+time, mark, audio, video {
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	font-size:100%;
+	vertical-align:baseline;
+	background:transparent;
+}
+body {
+	line-height:1;
+}
+
+main, article, aside, dialog, figure, footer, header,
+hgroup, nav, section {
+	display:block;
+}
+
+nav ul {
+	list-style:none;
+}
+
+blockquote, q {
+	quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content:'';
+	content:none;
+}
+
+a {
+	margin:0;
+	padding:0;
+	border:0;
+	font-size:100%;
+	vertical-align:baseline;
+	background:transparent;
+}
+
+ins {
+	background-color:#ff9;
+	color:#000;
+	text-decoration:none;
+}
+
+mark {
+	background-color:#ff9;
+	color:#000;
+	font-style:italic;
+	font-weight:bold;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+	border-bottom:1px dotted #000;
+	cursor:help;
+}
+
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+
+hr {
+	display:block;
+	height:1px;
+	border:0;
+	border-top:1px solid #cccccc;
+	margin:1em 0;
+	padding:0;
+}
+
+input, select {
+	vertical-align:middle;
+}
+
+/*======================================================================
+	Copyright (c) 2011, Yahoo! Inc. All rights reserved.
+	Code licensed under the BSD License:
+	http://developer.yahoo.com/yui/license.html
+	version: 2.9.0
+
+    Font-size Adjustment
+
+    77%   =  10px    |    123.1%  =  16px    |    167%  =  22px
+    85%   =  11px    |    131%    =  17px    |    174%  =  23px
+    93%   =  12px    |    138.5%  =  18px    |    182%  =  24px
+    100%  =  13px    |    146.5%  =  19px    |    189%  =  25px
+    108%  =  14px    |    153.9%  =  20px    |    197%  =  26px
+    116%  =  15px    |    161.6%  =  21px    |
+======================================================================*/
+
+body { font:13px/1.231 arial, helvetica, clean, sans-serif; *font-size:small;
+*font:x-small
+}
+select,
+input,
+textarea,
+button { font:99% arial, helvetica, clean, sans-serif }
+table { font-size:inherit; font:100% }
+pre,
+code,
+kbd,
+samp,
+tt { font-family:monospace; *font-size:108%;
+line-height:100% }
+
+/********************
+float fix
+********************/
+.clearfix:after { /*--for modorn brouser--*/
+	content: ".";
+	display: block;
+	line-height: 0;
+	clear: both;
+	height: 0;
+	color: transparent;
+	visibility: hidden;
+}
+
+.clearfix{ /*--IE 5.5-7--*/
+	zoom:1;
+}
+
+/********************
+hide outline
+********************/
+a, a img {
+	outline: 0;
+	overflow:hidden;
+}

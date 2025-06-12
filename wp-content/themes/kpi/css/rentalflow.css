@@ -1,0 +1,205 @@
+main section article {
+	max-width: 1020px;
+	margin: 0 auto;
+}
+
+main section article table {
+	width: 100%;
+	font-family: fot-chiaro-std, sans-serif;
+	font-weight: 700;
+	font-style: normal;
+	border-top: 2px solid #ccc;
+}
+
+main section article th,
+main section article td {
+	padding: 20px 100px;
+	border-bottom: 2px solid #ccc;
+	font-size: 32px;
+}
+
+main section article td small {
+	font-size: 18px;
+}
+
+main section ol{
+	margin: 1em 0 1em 4em;
+}
+
+main section ol li{
+	position: relative;
+	margin: 20px 0 50px;
+	list-style-position:  inside;
+	padding: 10px 20px;
+	border: 4px solid #34A637;
+	border-radius: 20px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	-ms-flex-flow: row wrap;
+	-webkit-flex-flow: row wrap;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+main section ol li .desc{
+	width: calc(100% - 160px);
+}
+
+main section ol li figure{
+	width: 160px;
+	text-align: center;
+}
+
+main section ol li p{
+	margin: 0;
+	font-size: 130%;
+	font-family: "fot-chiaro-std", sans-serif;
+}
+
+main section ol li::marker {
+	font-size: 200%;
+	font-family: "fot-chiaro-std", sans-serif;
+	color: #188303;
+	float: left;
+}
+
+main section ol li span{
+	font-size: 93%;
+	font-weight: normal;
+}
+
+main section ol li::after{
+	position: absolute;
+	content: url('../../../../../banana-de.com/test/kpi/media/common/arrow3.png');
+	display: block;
+	margin: 0 auto;
+	transform: scale(50%, 50%);
+	left: 43%;
+
+	bottom: -75px;
+}
+
+main section ol li:last-child::after{
+	content: none;
+}
+
+main section ul{
+	margin: 0 0 0 2em;
+	list-style:  none;
+}
+
+main #section2 ul li,
+main #section4 ul li{
+	display: -webkit-box; /* before Android4.3 iOS6:Safari */
+	display: -ms-flexbox; /* IE10 */
+	display: -webkit-flex; /* Pc-safari */
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	-ms-flex-flow: row wrap; /* IE10 */
+	-webkit-flex-flow: row wrap; /* Pc-safari */
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	margin: 0 0 20px 0;
+	padding: 10px;
+	background-color: #f9f9f9;
+	text-align: justify;
+	border-radius: 20px;
+	border: 4px solid #34A637;
+}
+
+main #section2 ul li figure,
+main #section4 ul li figure{
+	width: 160px;
+}
+
+main #section2 ul li p,
+main #section4 ul li p{
+	width:calc(100% - 160px);
+	margin: 0;
+    font-size: 130%;
+    font-family: "fot-chiaro-std", sans-serif;
+}
+
+
+#section2 ul li figure{
+	text-align: center;
+}
+
+
+#section3 ul{
+	display: block;
+}
+
+#section3 ul li{
+	width: auto;
+	background-color: transparent;
+}
+
+.fl_wrapper{
+	display: -webkit-box; /* before Android4.3 iOS6:Safari */
+	display: -ms-flexbox; /* IE10 */
+	display: -webkit-flex; /* Pc-safari */
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	-ms-flex-flow: row wrap; /* IE10 */
+	-webkit-flex-flow: row wrap; /* Pc-safari */
+	flex-flow: row wrap;
+/* 	justify-content: center; */
+/* 	align-items: center; */
+}
+
+.fl_wrapper ul{
+	width: 46%;
+	margin: 0 2%;
+}
+
+.fl_wrapper ul li{
+	border: 1px solid #ccc;
+	margin: 0 0 50px 0;
+	position: relative;
+	border: 4px solid #34A637;
+	border-radius: 20px;
+	text-align: center;
+}
+
+
+.fl_wrapper ul li:first-child{
+	border: none;
+}
+
+.fl_wrapper ul li::after{
+	content: url('../../../../../banana-de.com/test/kpi/media/common/arrow3.png');
+	position: absolute;
+	transform: scale(50%, 50%) translateX(-100%) translateY(-20px);
+}
+
+
+#section3 .fl_wrapper ul li:first-child::after{
+	content:  none;
+}
+
+#section3 .fl_wrapper ul li:last-child::after{
+	content:  none;
+}
+
+#section3 .fl_wrapper ul li h4{
+	margin: 0;
+}
+
+#section3 article div ul li p{
+	line-height: 1.6;
+	margin: 5px 0;
+    font-family: "fot-chiaro-std", sans-serif;
+}

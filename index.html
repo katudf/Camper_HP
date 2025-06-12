@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<!-- Mirrored from kpi-campingcar.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Jun 2025 02:53:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TBL2BTQS');</script>
+<!-- End Google Tag Manager -->
+	<meta charset="utf-8">
+	<title>KPIキャンピングカーレンタル｜岩手県奥州市</title>
+	<meta name="description" content="岩手県奥州市でキャンピングカーをレンタルするなら当店へ！自然豊かな東北地方を自由に旅しませんか？家族旅行やアウトドアに最適なキャンピングカーをご用意。手軽に非日常の冒険を体験できます。">
+	<meta name="keywords" content="キャンピングカー,レンタル,岩手,奥州市,東北">
+	<meta property="og:locale" content="ja_JP" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="KPIキャンピングカーレンタル｜岩手県奥州市" />
+	<meta property="og:description" content="岩手県奥州市でキャンピングカーをレンタルするなら当店へ！自然豊かな東北地方を自由に旅しませんか？家族旅行やアウトドアに最適なキャンピングカーをご用意。手軽に非日常の冒険を体験できます。" />
+	<meta property="og:url" content="https://kpi-campingcar.com/" />
+	<meta property="og:site_name" content="KPIキャンピングカーレンタル" />
+
+	<link rel="icon" href="media/favicon.ico">
+	<link rel="stylesheet" href="wp-content/themes/kpi/css/reset.css">
+	<link rel="stylesheet" href="wp-content/themes/kpi/css/common.css">	
+		<link href="wp-content/themes/kpi/css/index.css" rel="stylesheet" media="all">
+		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<!--[if IE]><script type="text/javascript">var console = { log: function() {} };</script><![endif]-->
+	<script type="text/javascript" src="js/jquery-3.7.1.js"></script>
+	<script type="text/javascript" src="js/jquery-migrate-3.4.0.js"></script>
+	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+
+	<script src="js/jquery.bxslider/jquery.bxslider.min.js"></script>
+	<link rel="stylesheet" href="js/jquery.bxslider/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="js/colorbox/colorbox.css">
+	<script src="js/colorbox/jquery.colorbox-min.js"></script>
+	<script src="js/slick/slick.js"></script>
+	<link rel="stylesheet" href="js/slick/slick.css">
+	<script src="js/common.js"></script>
+	<script src="../ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+	<script>
+  (function(d) {
+    var config = {
+      kitId: 'leu3rao',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
+	<script>
+		$(document).ready(function() {
+
+
+$("#topImg00").delay(1200).animate({opacity: 1}, 800);
+$("#topImgCatch").delay(1800).animate({opacity: 1}, 800);
+
+    var lastProcessedPhoto = null; // 前回処理された要素を記録するための変数
+
+    function toggleRandomPhoto() {
+        // .snapPhoto クラスを持つ要素をすべて取得
+        var $photos = $('.snapPhoto');
+        
+        // 現在表示されている要素の数を取得
+        var visibleCount = $photos.filter(':visible').length;
+        
+        var $randomPhoto;
+        
+        // 前回処理した要素と異なる要素をランダムに選択
+        do {
+            $randomPhoto = $photos.eq(Math.floor(Math.random() * $photos.length));
+        } while ($randomPhoto.is(lastProcessedPhoto)); // 同じ要素が選ばれたら再度選択
+
+        var actionTaken = false; // 処理が行われたかどうかを記録するフラグ
+
+        // フェードアウトの条件: 表示されている要素が6枚未満にならないように制限
+        if (visibleCount > 10) {
+            // ランダムな要素が表示されている場合はフェードアウト
+            if ($randomPhoto.is(':visible')) {
+                $randomPhoto.stop(true, true).fadeOut(750);
+                actionTaken = true; // 処理が行われたのでフラグをtrueに
+            }
+        }
+
+        // フェードインの条件: 常にフェードインを許可
+        if (!$randomPhoto.is(':visible')) {
+            $randomPhoto.stop(true, true).fadeIn(750);
+            actionTaken = true; // 処理が行われたのでフラグをtrueに
+        }
+
+        // 処理が行われた場合は、今回の要素を記録し、次の処理を行う
+        if (actionTaken) {
+            lastProcessedPhoto = $randomPhoto; // 今回処理した要素を記録
+            setTimeout(toggleRandomPhoto, 1000); // 1秒後に再度実行
+        } else {
+            // 処理が行われなかった場合はすぐに次の処理を実行
+            toggleRandomPhoto();
+        }
+    }
+
+    // 初回実行
+    toggleRandomPhoto();
+
+
+
+
+  // ウィンドウサイズや要素サイズに基づいて#mainimageのサイズを変更する関数
+                    function resizeMainImage() {
+    // 1. ウィンドウのサイズを取得
+                        var windowWidth = $(window).width();
+                        var windowHeight = $(window).height();
+    // 2. 要素「#mainimage」の大きさを取得
+                        var mainImageWidth = $('#topIMgMain').width();
+                        var mainImageHeight = $('#topIMgMain').height();
+    // 3. ウィンドウの高さ/要素「#topIMgMain」-80pxの高さを取得
+                        var heightRatio = (windowHeight - 80) / mainImageHeight;
+    // 4. ウィンドウの幅/要素「#topIMgMain」の幅を取得
+                        var widthRatio = windowWidth / mainImageWidth;
+    // 5. 3. と 4. のいずれか小さい数値を倍率として設定
+                        var scaleRatio = Math.min(heightRatio, widthRatio);
+    // CSSのtransformを使用して#topIMgMainのサイズを変更
+                        $('#topIMgMain,#carAndCatch').css({
+                            'transform': 'scale(' + scaleRatio + ')',
+      'transform-origin': 'top center'  // 拡大・縮小の基点を左上に設定
+    });
+                        $('#imgWrapperL,#imgWrapperR').css({
+                            'transform': 'scale(' + scaleRatio + ')'
+                        });
+                    }
+  // 初期実行：ページ読み込み時に実行
+  $(window).on('load', function() {
+    resizeMainImage();
+  });
+
+
+  // 追加条件：ウィンドウサイズが変更された場合に再調整
+                    $(window).resize(function() {
+                        resizeMainImage();
+      // resizeMainImage2();
+                    });
+
+
+    function shakeElement() {
+    var shakeTimes = 4; // 4回繰り返す
+    var currentShake = 0; // 現在の回数
+    var interval = setInterval(function() {
+        if (currentShake % 2 === 0) {
+            $("#topImg00").css({ 'transform': 'rotate(1deg)' });
+        } else {
+            $("#topImg00").css({ 'transform': 'rotate(-1deg)' });
+        }
+        currentShake++;
+
+        // 規定の回数繰り返したら終了し、次のランダムタイミングを設定
+        if (currentShake > shakeTimes) {
+            $("#topImg00").css({ 'transform': 'rotate(0deg)' }); // 元に戻す
+            clearInterval(interval);
+
+            // ランダムな時間（1〜5秒後）に再びブルブル動かす
+            let randomTime = Math.floor(Math.random() * 7000) + 2000; // 1000〜5000msの間でランダム
+            setTimeout(shakeElement, randomTime);
+          }
+    }, 80); // 100ミリ秒ごとに揺れる
+  }
+
+// 初回実行
+  shakeElement();
+
+// 持ち物／キャンプ場
+  // ページ読み込み時に「#top6 article」を閉じる
+  $('#top6 article').slideUp();
+
+  // 「#top6 h2」がクリックされたときに処理を行う
+  $('#top6 h2').on('click', function() {
+    // クリックされた「h2」の直後の「article」を取得
+    var article = $(this).next('article');
+    var span = $(this).find('span');
+
+    // 「article」が閉じている場合はslideDown、開いている場合はslideUp
+    if (article.is(':visible')) {
+      article.slideUp('fast');
+      // スパンのテキストを「クリックで開きます↓」に変更
+      span.html('クリックで開きます↓');
+    } else {
+      article.slideDown('fast');
+      // スパンのテキストを「クリックで閉じます↑」に変更
+      span.html('クリックで閉じます↑');
+    }
+  });
+
+
+
+
+
+
+		});
+	</script>
+	
+</head>
+<body class="home blog wp-embed-responsive wp-theme-kpi is-light-theme no-js hfeed">
+<!-- Google Tag Manager (noscript) -->
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TBL2BTQS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header>
+	<h1><a href="index.html"><img src="media/common/logo.webp" alt="KPIキャンピングカーレンタル"></a></h1>
+	<nav id="gnav">
+<div id="navWrapper">
+		<ul id="hnavList1">
+			<li id="gnav1"><a href="index.html" title="ホーム"><span class="icon"><img src="media/common/nav1.svg"></span>ホーム</a></li>
+			<li id="gnav2"><a href="car/index.html" title="車両紹介"><span class="icon"><img src="media/common/nav2.svg"></span>車両紹介</a></li>
+			<li id="gnav3"><a href="price/index.html" title="料金案内"><span class="icon"><img src="media/common/nav3.svg"></span>料金案内</a></li>
+			<li id="gnav4"><a href="news/index.html" title="お知らせ"><span class="icon"><img src="media/common/nav4.svg"></span>お知らせ</a></li>
+			<li id="gnav5"><a href="about/index.html" title="店舗紹介／お問合せ"><span class="icon"><img src="media/common/nav5.svg"></span>店舗紹介／お問合せ</a></li>	
+		</ul>
+		<ul id="hnavList2">
+			<li id="gnav3"><a href="rentalflow/index.html" title="貸出当日の流れ"><span class="icon"><img src="media/common/nav3.svg"></span>貸出当日の流れ</a></li>
+			<li id="gnav3"><a href="rentalflow/index.html#section3" title="返却時の流れ"><span class="icon"><img src="media/common/nav3.svg"></span>返却時の流れ</a></li>
+			<li id="gnav6"><a href="booking-form/index.html" title="ご予約はこちら">ご予約はこちら</a></li>	
+		</ul>
+		</div>
+		<div class="searchbox"><form id="form" action="https://kpi-campingcar.com/" method="get">
+    <input id="s-box" name="s" type="text" placeholder="キーワードを入力"/>
+    <button type="submit" id="s-btn-area"></button>
+</form></div>
+	</nav>
+		<div id="reserve_button">
+        <a href="booking-form/index.html">ご予約はこちら</a>
+		<button id="closeButton">×</button>
+	</div>
+	</header>
+<div id="wrapper"><div id="mainimage">
+	<img id="topIMgMain" src="wp-content/uploads/2024/09/topIMgMain.webp" alt="">
+	<div id="thumbImgs">
+		<div id="imgWrapperL">
+			<img id="fadeImg01" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg01.webp" alt="">
+			<img id="fadeImg02" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg02.webp" alt="">
+			<img id="fadeImg03" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg03.webp" alt="">
+			<img id="fadeImg04" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg04.webp" alt="">
+			<img id="fadeImg05" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg05.webp" alt="">
+			<img id="fadeImg06" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg06.webp" alt="">
+			<img id="fadeImg07" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg07.webp" alt="">
+		</div>
+		<div id="imgWrapperR">
+			<img id="fadeImg08" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg08.webp" alt="">
+			<img id="fadeImg09" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg09.webp" alt="">
+			<img id="fadeImg10" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg10.webp" alt="">
+			<img id="fadeImg11" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg11.webp" alt="">
+			<img id="fadeImg12" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg12.webp" alt="">
+			<img id="fadeImg13" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg13.webp" alt="">
+			<img id="fadeImg14" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg14.webp" alt="">
+			<img id="fadeImg15" class="snapPhoto" src="wp-content/uploads/2024/09/fadeImg15.webp" alt="">
+		</div>
+	</div>
+	<div id="carAndCatch">
+		<img id="topImgCatch" class="mainImgPart" src="wp-content/uploads/2024/09/topImgCatch.webp" alt="">
+		<img id="topImg00" class="mainImgPart" src="wp-content/uploads/2024/09/topImg00.webp" alt="">
+	</div>
+</div>
+<main>
+	<section id="news">
+		<article>
+			<h2>お知らせ<span class="eng">News and Information</span></h2>
+			<div id="news_inner">
+																							<dl>
+							<dt><time>2025/6/9</time></dt>
+							<dd><a href="%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88%e5%87%ba%e5%ba%97%e8%a8%98%e9%8c%b2%e3%82%92%e6%9b%b4%e6%96%b0%e3%81%97%e3%81%be%e3%81%97%e3%81%9f%ef%bc%81%ef%bc%81/index.html">イベント出店記録を更新しました！！</a></dd>
+						</dl>
+											<dl>
+							<dt><time>2025/6/5</time></dt>
+							<dd><a href="6%e6%9c%88%e3%81%ae%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88%e6%83%85%e5%a0%b1%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88%f0%9f%8e%aa/index.html">6月のイベント情報イベント🎪</a></dd>
+						</dl>
+											<dl>
+							<dt><time>2025/5/31</time></dt>
+							<dd><a href="%e5%ad%90%e9%80%a3%e3%82%8c%e3%81%a7%e6%a5%bd%e3%81%97%e3%82%81%e3%82%8b%ef%bc%81%ef%bc%81%e4%bb%8a%e5%b9%b4%e3%81%ae%e5%a4%8f%e3%82%aa%e3%82%b9%e3%82%b9%e3%83%a1%e3%82%ad%e3%83%a1%e3%82%8c%e3%81%8b%e3%82%8c%e3%81%8b%e3%82%8c%ef%bc%81%ef%bc%81/index.html">子連れで楽しめる！！今年の夏オススメキャンプスポット⛺</a></dd>
+						</dl>
+											<dl>
+							<dt><time>2025/5/29</time></dt>
+							<dd><a href="781-2/index.html">キャンピングカーレンタルの流れ🚙</a></dd>
+						</dl>
+											<dl>
+							<dt><time>2025/5/26</time></dt>
+							<dd><a href="771-2/index.html">キャンピングカーで行きたい！！東北6大祭り✨</a></dd>
+						</dl>
+																</div>
+		</article>
+		<p style="text-align:right;font-weight:bold;"><a href="news/index.html" style="text-decoration:none;">&raquo;お知らせ一覧はこちら</a></p>
+	</section>
+	<section id="snsLink">
+		<ul>
+			<li><a href="https://www.instagram.com/kpi_campingcar.rental/" target="_blank" title="木村塗装工業＠奥州市水沢 • Instagram photos and videos"><img src="wp-content/uploads/2024/10/instagram_logo.svg" alt="" width="32">Instagram 随時更新中！</a></li>
+			<li><a href="https://line.me/R/ti/p/@192ardoj?oat_content=qr" target="_blank" title="木村塗装工業　公式LINE"><img src="wp-content/uploads/2024/10/line_logo.svg" width="32" alt="">公式LINE お得な情報発信中！<br />お友達追加はこちら</a><img class="line_qr" width="90" height="90" src="wp-content/uploads/2024/10/M_192ardoj_BW.png" alt=""></li>
+		</ul>
+	</section>
+	<section id="top1">
+		<div id="top1_header">
+			<h2><img src="media/index/title_car.webp" alt="車両紹介"></h2>
+			<img id="car1" src="media/index/car1.webp" alt="">
+		</div>
+		<article>
+			<div class="top1_l">
+				<h3>充実装備、ゆとりあるリビングルーム<br>快適空間でワンランク上の<br>キャンピングカーライフを演出</h3>
+				<div class="more"><a href="car/index.html#zil">ZIL（ジル）520　詳細はこちら</a></div>
+				<div class="photo">
+					<iframe src="https://view.ricoh360.com/07e0ef8a-2a27-4901-9c8d-fe8fd2b18c6a?type=compact" frameborder="0"></iframe>
+				</div>
+			</div>
+			<div class="top1_r">
+				<h3>セミダブルベッド＋大容量ラゲッジスペース<br>＋快適ダイネット<br>ハイクラススタンダードモデル</h3>
+				<div class="more"><a href="car/index.html#crea">CREA(クレア)5.3X　詳細はこちら</a></div>
+				<div class="photo"><iframe src="https://view.ricoh360.com/1186d7e6-3fd2-44c4-afc3-750ade80f0e3?type=compact" frameborder="0"></iframe></div>
+			</div>
+		</article>
+	</section>
+	<section id="top5">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/64u-NptBObM?si=JNYwuA1bmxZVnWFX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+		<div class="ytp-title-text"><a class="ytp-title-link yt-uix-sessionlink" target="_blank" data-sessionlink="feature=player-title" tabindex="0" href="https://www.youtube.com/watch?v=64u-NptBObM">【バンテック キャンピングカー】 ZiL520 〜秋燃ゆる 岩手の旅〜</a><div class="ytp-title-subtext"><a class="ytp-title-channel-name" target="_blank" href="#"></a></div></div>
+	</section>
+	<section id="top2">
+		<h2>貸出可能アイテム</h2>
+		<article>
+			<ul id="kashidashiItemImage">
+																							<li><figure><p><img decoding="async" src="wp-content/uploads/2024/09/img1-08.webp" alt="" /></p></figure></li>
+											<li><figure><p><img decoding="async" src="wp-content/uploads/2024/09/img1-09.webp" alt="" /></p></figure></li>
+											<li><figure><p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-262" src="wp-content/uploads/2024/09/img1-10-1.webp" alt="" width="899" height="674" srcset="https://kpi-campingcar.com/wp-content/uploads/2024/09/img1-10-1.webp 899w, https://kpi-campingcar.com/wp-content/uploads/2024/09/img1-10-1-300x225.webp 300w, https://kpi-campingcar.com/wp-content/uploads/2024/09/img1-10-1-768x576.webp 768w" sizes="auto, (max-width: 899px) 100vw, 899px" /></p></figure></li>
+											<li><figure><p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-308" src="wp-content/uploads/2024/10/img2-10.jpg" alt="" width="899" height="674" srcset="https://kpi-campingcar.com/wp-content/uploads/2024/10/img2-10.jpg 899w, https://kpi-campingcar.com/wp-content/uploads/2024/10/img2-10-300x225.jpg 300w, https://kpi-campingcar.com/wp-content/uploads/2024/10/img2-10-768x576.jpg 768w" sizes="auto, (max-width: 899px) 100vw, 899px" /></p></figure></li>
+											<li><figure><p><img decoding="async" src="wp-content/uploads/2024/10/CampingCar-rental-4.jpg" alt="A Dummy Image" /></p></figure></li>
+											<li><figure><p><img decoding="async" src="wp-content/uploads/2024/10/CampingCar-rental-5.jpg" alt="" /></p></figure></li>
+																</ul>
+			<div class="comment">
+
+																							<dl>
+							<dt>無料貸出アイテム</dt>
+							<dd>
+								<p>・BBQ設備（BBQコンロ、トング2本）<br />
+・紙皿、割り箸（人数分まで）<br />
+・椅子（6脚まで）<br />
+・キャンプテーブル<br />
+・大容量ポータブル電源<br />
+　　F3600(3840wh) クレア5.3X専用<br />
+　　F2400（2048wh）ジル520専用</p>							</dd>
+						</dl>
+											<dl>
+							<dt>有料オプション</dt>
+							<dd>
+								<p>・網2枚、鉄板1枚(清掃代)　500円</p>
+<p>・Coleman キャンピングチェア(最大2脚)<br />
+　1脚につき 500円</p>
+<p>・Coleman クーラーボックス（45ℓ）<br />
+　（内寸約27×56×32cm) 500円</p>
+<p>・給水＋排水(清掃代)　500円</p>
+<p style="line-height: 1.4;">・簡易トイレキット1回分(凝固剤)  200円 ※ジル520のみ</p>							</dd>
+						</dl>
+																	<p style="text-align:center;">※破損、紛失等が発生した場合には、<br />別途費用をご負担いただくことがございますので、<br />ご了承ください。</p>
+			</div>
+		</article>
+	</section>
+	<section id="top3">
+		<article>
+			<ul>
+				<li><a href="car/index.html#section4"><img src="media/index/banner1.webp" alt="キャンピングカー使用方法"></a></li>
+				<li><a href="car/index.html#section6"><img src="media/index/banner2.webp" alt="キャンピングカーの使用マナー"></a></li>
+				<li><a href="car/index.html#section7"><img src="media/index/banner3.webp" alt="万が一、自己の時は・・・"></a></li>
+			</ul>
+		</article>
+	</section>
+	<section id="top6">
+								<ul>
+			<li>
+				<h2>🚚キャンピングカー必須アイテム<span>クリックで開きます↓</span></h2>
+				<article>
+					<p>(こちらを参考にご用意ください！！)</p>
+<ul>
+<li>🛏️　寝具(マット・枕・寝袋・ブランケット)</li>
+<li>👕　着替え・タオル(オススメは泊数＋1セット)</li>
+<li>🔦　ランタン・懐中電灯</li>
+<li>🧴　アメニティグッズ</li>
+<li>📱　スマホ・タブレットの充電器</li>
+<li>🚙　免許証</li>
+<li>💴　財布(現金)</li>
+<li>🗑️　ゴミ袋</li>
+<li>🧻　ティッシュ</li>
+<li>🥤　飲料水</li>
+<li>💊　常備薬</li>
+<li>👓　眼鏡やコンタクト用アイテム</li>
+<li>🏕️　BBQをする場合は炭・洗剤・たわし必須！</li>
+<li>🍴　キッチンのガス使用の際はガスも必須！</li>
+</ul>
+				</article>
+			</li>
+			<li>
+				<h2>🌟あると便利アイテム<span>クリックで開きます</span></h2>
+				<article>
+					<p>　(こちらを参考にご用意下さい！！)</p>
+<ul>
+<li>🍴 キッチン用品</li>
+<li>🧹 掃除用具</li>
+<li>☂️ 雨具</li>
+<li>👚 ハンガー</li>
+<li>🩴 スリッパ</li>
+<li>🩹 救急セット</li>
+<li>🎧 耳栓</li>
+<li>🧯 虫よけ</li>
+<li>🕶️ 日焼け止め</li>
+<li>🍀 消臭剤</li>
+</ul>
+				</article>
+			</li>
+			<li>
+				<h2>🏕️Carstayで予約できる車中泊の場所<span>クリックで開きます↓</span></h2>
+				<article>
+					<ul>
+<li>・遠野市観光協会</li>
+<li>・陸前高田市まちなか駐車場</li>
+<li>・湯YOUパーク　亀の井ホテル　一関</li>
+<li>・長者RVパーク</li>
+<li>・ドライブイン宮古</li>
+<li>・おおみや園芸</li>
+</ul>
+<p>↓詳細はここをクリック↓<br />
+<a title="岩手県の車中泊スポット・キャンプ場検索結果 | Carstay" href="https://carstay.jp/ja/stations/tohoku/iwate/?currentLat=37.8130755&amp;currentLng=139.1916795&amp;mode=map" target="_blank" rel="noopener">岩手県の車中泊スポット・キャンプ場検索結果 | Carstay</a></p>
+<h3>※直接個人で予約できる車中泊のスポット</h3>
+<ul>
+<li>・<a title="岩手山パノラマ大キャンプ場 • Instagram photos and videos" href="https://www.instagram.com/superview_campsite/" target="_blank" rel="noopener">岩手山パノラマキャンプ場</a></li>
+<li>・奥州平泉温泉そば庵しづか亭(湯YOUパーク)</li>
+<li>・いちのせき厳美オートキャンプ場</li>
+<li>・岩手山焼走り国際交流村</li>
+<li>・RVパーク秘湯　夏油温泉</li>
+<li>・普代浜園地キラウミRVパーク</li>
+<li>・RVパーク　岩手山</li>
+<li>・花巻温泉(湯YOUパーク)</li>
+<li>・星座の森　カーサイト</li>
+<li>・つぶ沼キャンプ場　カーサイト(予約なしOK)</li>
+<li>・<a title="ザ キャンパス～トロイカの森～ • Instagram photos and videos" href="https://www.instagram.com/the_campus3555/" target="_blank" rel="noopener">the campas キャンプ場</a></li>
+<li>・<a title="ベアーベル • Instagram photos and videos" href="https://www.instagram.com/campgrandbearbell/#" target="_blank" rel="noopener">campgrandbearbell(電源があるサイト有)</a></li>
+<li>・<a href="https://www.instagram.com/rvpaku/">RVパーク一関弥栄</a></li>
+<li>・<a href="https://www.instagram.com/tsunagarinomori/">TSUNAGARI NO MORI -Artist Village Ichinoseki-</a></li>
+</ul>
+<p>🛁こちらはお客様自身で検索して頂き、 ご予約お願い致します。</p>
+				</article>
+			</li>
+		</ul>
+							</section>
+	<section id="top4">
+		<h2><img src="media/index/title_photoalbum.webp" alt="フォトアルバム"></h2>
+		<article>
+			<ul>
+																							<li>
+							<figure>
+								<a class="photo1" href="wp-content/uploads/2025/06/68%e6%97%a5-%e6%b0%b4%e6%b2%a2%e5%95%86%e4%ba%ba%e7%a5%ad%e3%82%8a-%e3%81%9f%e3%81%8f%e3%81%95%e3%82%93%e3%81%ae%e3%81%94%e6%9d%a5%e5%a0%b4%e3%81%82%e3%82%8a%e3%81%8c%e3%81%a8%e3%81%86%e3%81%94%e3%81%96%e3%81%84%e3%81%ba%e3%81%9f%ef%bc%81%ef%bc%81.png" rel="photogallery803" title=""><img src="wp-content/uploads/2025/06/68%e6%97%a5-%e6%b0%b4%e6%b2%a2%e5%95%86%e4%ba%ba%e7%a5%ad%e3%82%8a-%e3%81%9f%e3%81%8f%e3%81%95%e3%82%93%e3%81%ae%e3%81%94%e6%9d%a5%e5%a0%b4%e3%81%82%e3%82%8a%e3%81%8c%e3%81%a8%e3%81%86%e3%81%94%e3%81%96%e3%81%84%e3%81%ba%e3%81%9f%ef%bc%81%ef%bc%81.png"></a><span class="kakudai"><img src="media/common/kakudai.webp"></span>
+																<a href="wp-content/uploads/2025/06/68%e6%97%a5-%e6%b0%b4%e6%b2%a2%e5%95%86%e4%ba%ba%e7%a5%ad%e3%82%8a-%e3%81%9f%e3%81%8f%e3%81%95%e3%82%93%e3%81%ae%e3%81%94%e6%9d%a5%e5%a0%b4%e3%81%82%e3%82%8a%e3%81%8c%e3%81%a8%e3%81%86%e3%81%94%e3%81%96%e3%81%84%e3%81%ba%e3%81%9f%ef%bc%81%ef%bc%81-1.png" rel="photogallery803" title=""></a>
+																								<a href="wp-content/uploads/2025/06/68%e6%97%a5-%e6%b0%b4%e6%b2%a2%e5%95%86%e4%ba%ba%e7%a5%ad%e3%82%8a-%e3%81%9f%e3%81%8f%e3%81%95%e3%82%93%e3%81%ae%e3%81%94%e6%9d%a5%e5%a0%b4%e3%81%82%e3%82%8a%e3%81%8c%e3%81%a8%e3%81%86%e3%81%94%e3%81%96%e3%81%84%e3%81%ba%e3%81%9f%ef%bc%81%ef%bc%81-2.png" rel="photogallery803" title=""></a>
+																																																																								<figcaption class="photoComment"><p style="text-align: center;">🎪イベント記録🎪</p>
+<p>&nbsp;</p>
+<p style="text-align: center;">6/8(日)に水沢駅前通りで行われました『水沢商人祭り』に参加させていただきました！！</p>
+<p style="text-align: center;">たくさんの笑顔があふれていてスタッフ一同楽しい時間を過ごすことが出来ました✨</p>
+<p style="text-align: center;">写真にご協力いただいた皆様ありがとうございました(^▽^)</p>
+<p style="text-align: center;"> </p></figcaption>
+							</figure>
+						</li>
+											<li>
+							<figure>
+								<a class="photo1" href="wp-content/uploads/2025/05/1Xkh-a6ol2rQl6XfeC7PYQKR717RHsG5Ut5PzF68Ec-YJg3E_x65BwnMBl_mj9-tFHmd9-aQgYaoaS8DFw9ZJirs6B7r1SA5uo2OsyGSEsTNFDiFOwK58lzs5Oobw78DjgTjgTGATm1_gXXKFHhmhg.jpg" rel="photogallery757" title=""><img src="wp-content/uploads/2025/05/1Xkh-a6ol2rQl6XfeC7PYQKR717RHsG5Ut5PzF68Ec-YJg3E_x65BwnMBl_mj9-tFHmd9-aQgYaoaS8DFw9ZJirs6B7r1SA5uo2OsyGSEsTNFDiFOwK58lzs5Oobw78DjgTjgTGATm1_gXXKFHhmhg.jpg"></a><span class="kakudai"><img src="media/common/kakudai.webp"></span>
+																<a href="wp-content/uploads/2025/05/1qoYveSZLk2fFAgHCcFz_3MiIiGDc2sF3wOWejl1OF18XjTbb7Vq75hYTtboEFJQfBT7EfZiTk5IY1lPxfRgcFYCem7p6yz7s-DXNLBdzke9pcxsS9DWnV5eIiu7mB4mCPs1Dl06N9VAVlxHgFo47A.jpg" rel="photogallery757" title=""></a>
+																								<a href="wp-content/uploads/2025/05/edited_DSC_3370_20250508_104040-scaled.jpg" rel="photogallery757" title=""></a>
+																																																																								<figcaption class="photoComment"><p style="text-align: center;">クレア5.3Xご利用　Y様⛺</p>
+<p>&nbsp;</p>
+<p style="text-align: center;">天気が悪かったですが、その分キャンピングカーを満喫しました✨</p>
+<p style="text-align: center;">ありがとうございました！！</p>
+<p style="text-align: center;">また機会がありましたら、よろしくおねがいします🎶</p>
+<p>&nbsp;</p>
+<p style="text-align: center;">素敵なお写真とご感想</p>
+<p style="text-align: center;">ありがとうございます😊</p>
+<p>&nbsp;</p></figcaption>
+							</figure>
+						</li>
+											<li>
+							<figure>
+								<a class="photo1" href="wp-content/uploads/2025/04/1.jpg" rel="photogallery745" title=""><img src="wp-content/uploads/2025/04/1.jpg"></a><span class="kakudai"><img src="media/common/kakudai.webp"></span>
+																<a href="wp-content/uploads/2025/04/2.jpg" rel="photogallery745" title=""></a>
+																								<a href="wp-content/uploads/2025/04/3.jpg" rel="photogallery745" title=""></a>
+																								<a href="wp-content/uploads/2025/04/4.jpg" rel="photogallery745" title=""></a>
+																																																																<figcaption class="photoComment"><p style="text-align: center;">ジル520リピートご利用　U様⛺</p>
+<p>&nbsp;</p>
+<p style="text-align: center;">いつもご利用いただき</p>
+<p style="text-align: center;">ありがとうございます！！</p>
+<p style="text-align: center;">素敵なお写真も</p>
+<p style="text-align: center;">ありがとうございます😊</p></figcaption>
+							</figure>
+						</li>
+											<li>
+							<figure>
+								<a class="photo1" href="wp-content/uploads/2025/02/IMG_7490.jpg" rel="photogallery665" title=""><img src="wp-content/uploads/2025/02/IMG_7490.jpg"></a><span class="kakudai"><img src="media/common/kakudai.webp"></span>
+																<a href="wp-content/uploads/2025/02/IMG_7501.jpg" rel="photogallery665" title=""></a>
+																								<a href="wp-content/uploads/2025/02/IMG_7496.jpg" rel="photogallery665" title=""></a>
+																								<a href="wp-content/uploads/2025/02/IMG_7497.jpg" rel="photogallery665" title=""></a>
+																																																																<figcaption class="photoComment"><p style="text-align: center;">🎪イベント記録🎪</p>
+<p>&nbsp;</p>
+<p style="text-align: center;">2025/2/16に参加させて頂いた</p>
+<p style="text-align: center;"><a href="https://www.instagram.com/tsunagarinomori/">つながりのもり</a>様のイベント✨</p>
+<p style="text-align: center;">素敵な空間⛺、素敵な音楽🎶</p>
+<p style="text-align: center;">素敵な笑顔あふれる一日でした！！</p>
+<p style="text-align: center;">ありがとうございました✨</p></figcaption>
+							</figure>
+						</li>
+											<li>
+							<figure>
+								<a class="photo1" href="wp-content/uploads/2025/01/%e8%a5%bf%e5%b0%be%e6%a7%984.jpg" rel="photogallery627" title=""><img src="wp-content/uploads/2025/01/%e8%a5%bf%e5%b0%be%e6%a7%984.jpg"></a><span class="kakudai"><img src="media/common/kakudai.webp"></span>
+																<a href="wp-content/uploads/2025/01/%e8%a5%bf%e5%b0%be%e6%a7%985.jpg" rel="photogallery627" title=""></a>
+																								<a href="wp-content/uploads/2025/01/%e8%a5%bf%e5%b0%be%e6%a7%981.jpg" rel="photogallery627" title=""></a>
+																								<a href="wp-content/uploads/2025/01/%e8%a5%bf%e5%b0%be%e6%a7%982.jpg" rel="photogallery627" title=""></a>
+																								<a href="wp-content/uploads/2025/01/%e8%a5%bf%e5%b0%be%e6%a7%983.jpg" rel="photogallery627" title=""></a>
+																								<a href="wp-content/uploads/2025/01/%e8%a5%bf%e5%b0%be%e6%a7%986-scaled.jpg" rel="photogallery627" title="お子さんたちが残してくれた旅の思い出がかわいすぎる✨"></a>
+																								<a href="wp-content/uploads/2025/01/%e8%a5%bf%e5%b0%be%e6%a7%987-scaled.jpg" rel="photogallery627" title="絵がとっても上手～👏"></a>
+																																								<figcaption class="photoComment"><p style="text-align: center;">クレア5.3Xご利用　N様⛺</p>
+<p style="text-align: center;"> </p>
+<p style="text-align: center;">大人2人、子供4人で利用しました。予約から返却まで、年末年始にもかかわらずご対応下さった方がみんな親切で、とても楽しく旅行することが出来ました！！</p>
+<p style="text-align: center;"><div class="more-link-container"><a class="more-link" href="%e3%82%ad%e3%83%a3%e3%83%b3%e3%83%94%e3%83%b3%e3%82%b0%e3%82%ab%e3%83%ac%e3%83%b3%e3%82%bf%e3%83%abn%e6%a7%98/index.html#more-627">Continue reading <span class="screen-reader-text">キャンピングカーレンタルN様</span></a></div></p></figcaption>
+							</figure>
+						</li>
+											<li>
+							<figure>
+								<a class="photo1" href="wp-content/uploads/2024/12/gULFarjk5hIsMfuqdRQtBxhhLXqufF_s2EE0CfUN7kXBl8kAUZGOtN3LUKYCdJSdVaUFN71AaIhzgxYB9DjU7h4evlaYzSO4ZsewY6R-a-tQFiYp_LRse-YguTDZErLZyoEYSNdl5TIBu65cFcBv0A.jpg" rel="photogallery564" title=""><img src="wp-content/uploads/2024/12/gULFarjk5hIsMfuqdRQtBxhhLXqufF_s2EE0CfUN7kXBl8kAUZGOtN3LUKYCdJSdVaUFN71AaIhzgxYB9DjU7h4evlaYzSO4ZsewY6R-a-tQFiYp_LRse-YguTDZErLZyoEYSNdl5TIBu65cFcBv0A.jpg"></a><span class="kakudai"><img src="media/common/kakudai.webp"></span>
+																<a href="wp-content/uploads/2024/12/znt6vzQ4VC18U9RhOBqm9OwgzFAHoZlRD9BPGm4CXLdJAS6KCh87QQKuYsnE6uA22RC0lkEMOmUPBGJ95Hurgnt8gHL8PAfvvitFUsnJw7VpPbtG-twvrQ83ptU6W03KjgTjgTGATm1_gXXKFHhmhg.jpg" rel="photogallery564" title=""></a>
+																								<a href="wp-content/uploads/2024/12/Gc0JlR7Nh6-fXgMCH05Fi9qfMBoUFCQi4V9IEoLPDxstPYGu0_HQHSSk53HUQB9-G43PkwPgC6slJz9_0FViVFa8V13g7WCO9A1J3yZl8PmLX4qn4Rigq6xNgobJXXzOkpngZXezwyv0UN-p8nCI8Q.jpg" rel="photogallery564" title=""></a>
+																								<a href="wp-content/uploads/2024/12/baaCm390xmeMeLpfIB-xE0zJdVoDT8srTM8wpWFpiNwlvgaNc38EJHYD1f3tRN5ELiDklfzpfT8x-qhOoPpnniQJflKudR4baDTKfpyxNnDRA4KN-JtaWXHVgIxh1p7rQQq1-WG3eFy_I7uXKcbEYg.jpg" rel="photogallery564" title=""></a>
+																																																																<figcaption class="photoComment"><p style="text-align: center;">ジル520ご利用　T様⛺</p>
+<p>&nbsp;</p>
+<p dir="ltr" style="text-align: center;">実際に利用して、今後もまたレンタルしたいと思った。</p>
+<p dir="ltr" style="text-align: center;">予想していたより運転もしやすく、他社のすれ違いによる煽りや揺れもそんなに感じなかった。</p>
+<p dir="ltr" style="text-align: center;">いろんな人に広めて、オススメしたい！！</p>
+<p style="text-align: center;"> </p>
+<p dir="ltr" style="text-align: center;">素敵なお写真とご感想</p>
+<p dir="ltr" style="text-align: center;">ありがとうございます😄</p></figcaption>
+							</figure>
+						</li>
+											<li>
+							<figure>
+								<a class="photo1" href="wp-content/uploads/2024/12/DSC_0657-scaled.jpg" rel="photogallery562" title=""><img src="wp-content/uploads/2024/12/DSC_0657-scaled.jpg"></a><span class="kakudai"><img src="media/common/kakudai.webp"></span>
+																<a href="wp-content/uploads/2024/12/DSC_0656-scaled.jpg" rel="photogallery562" title=""></a>
+																								<a href="wp-content/uploads/2024/12/DSC_0642-scaled.jpg" rel="photogallery562" title=""></a>
+																																																																								<figcaption class="photoComment"><p style="text-align: center;">クレア5.3Xご利用　S様⛺</p>
+<p>&nbsp;</p>
+<p style="text-align: center;">素敵なお写真</p>
+<p style="text-align: center;">ありがとうございます😊</p></figcaption>
+							</figure>
+						</li>
+											<li>
+							<figure>
+								<a class="photo1" href="wp-content/uploads/2024/12/IMG_6065.jpg" rel="photogallery560" title=""><img src="wp-content/uploads/2024/12/IMG_6065.jpg"></a><span class="kakudai"><img src="media/common/kakudai.webp"></span>
+																<a href="wp-content/uploads/2024/12/IMG_6063.jpg" rel="photogallery560" title=""></a>
+																								<a href="wp-content/uploads/2024/12/IMG_6064.jpg" rel="photogallery560" title=""></a>
+																								<a href="wp-content/uploads/2024/12/IMG_6066.jpg" rel="photogallery560" title=""></a>
+																								<a href="wp-content/uploads/2024/12/IMG_6067.jpg" rel="photogallery560" title=""></a>
+																																																								<figcaption class="photoComment"><p style="text-align: center;">ジル520ご利用　O様⛺</p>
+<p>&nbsp;</p>
+<p style="text-align: center;">素敵なお写真</p>
+<p style="text-align: center;">ありがとうございます😊</p></figcaption>
+							</figure>
+						</li>
+																</ul>
+			<p class="more"><a href="photoalbum/index.html">さらに見る</a></p>
+		</article>
+	</section>
+</main>
+</div>
+<p class="gotop"><a href="#">↑</a></p>
+<footer>
+	<h3><img src="media/common/title_ukewatashi.webp"></h3>
+	<div class="footer_inner">
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1840.2797400470504!2d141.13281751655308!3d39.12993066261075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f8f35861c962ff1%3A0x40fc0b91931df09d!2z44CSMDIzLTA4NjMg5bKp5omL55yM5aWl5bee5biC5rC05rKi5bed56uv77yS77yR77yT4oiS77yR!5e0!3m2!1sja!2sjp!4v1725436951878!5m2!1sja!2sjp" width="400" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+		<address>
+			<p class="font_m">岩手県奥州市水沢字川端213番地1</p>
+			<p>有限会社 木村塗装工業 内</p>
+			<p>&nbsp;</p>
+			<p>お問い合わせ</p>
+			<p class="tel">☎︎ <strong>0197-23-4459</strong></p>
+			<p>休日：	第二、第四土曜日、<br>		日曜日、祝日、GW、年末年始<br><br />		※休日の貸し出しもご相談ください</p>
+			<p id="footer_contact"><a href="about/index.html">お問合せはこちら</a></p>
+		</address>
+		<figure><img src="media/common/nobori.webp"></figure>
+	</div>
+	<nav id="fnav">
+		<ul>
+			<li><a href="index.html" title="ホーム">ホーム</a></li>
+			<li><a href="car/index.html" title="車両紹介">車両紹介</a></li>
+			<li><a href="price/index.html" title="料金案内">料金案内</a></li>
+			<li><a href="news/index.html" title="お知らせ">お知らせ</a></li>
+			<li><a href="about/index.html" title="店舗紹介／お問合せ">店舗紹介／お問合せ</a></li>	
+			<li><a href="rentalflow/index.html" title="貸出当日の流れ">貸出当日の流れ</a></li>
+			<li><a href="rentalflow/index.html#section3" title="返却時の流れ">返却時の流れ</a></li>
+			<li><a style="background:#26ae10;" href="booking-form/index.html" title="ご予約はこちら">ご予約はこちら</a></li>	
+		</ul>
+	</nav>
+</footer>
+<div id="copyright">&copy; Kimura Painting Industry. All right reserved.</div>
+	
+<script>
+	// ボタンと表示エリアの要素を取得
+	const closeButton = document.getElementById('closeButton');
+	const reserveButton = document.getElementById('reserve_button');
+
+	// 閉じるボタンがクリックされたときに要素を非表示にする
+	closeButton.addEventListener('click', function () {
+		reserveButton.style.display = 'none'; // 要素を非表示にする
+	});
+</script>
+
+<script src="js/chat-loader.js" defer></script>
+</body>
+
+<!-- Mirrored from kpi-campingcar.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Jun 2025 02:54:06 GMT -->
+</html>

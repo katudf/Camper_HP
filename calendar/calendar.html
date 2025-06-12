@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- PHP開始 -->
+
+<!-- PHP終了 -->
+
+<html>
+
+<!-- Mirrored from kpi-campingcar.com/calendar/calendar.php by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Jun 2025 02:54:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+
+<Style type="text/css">
+<!--
+
+//-->
+</Style>
+<link rel="stylesheet" href="calendar.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+
+<Script type="text/JavaScript">
+<!--
+/*********************************
+ *　月変更（+1） 　       　     *
+ *********************************/
+function UpMonth($Year,$Month){
+	if($Month!=12){
+		$Month = $Month + 1;
+	}else{
+		$Year  = $Year + 1;
+		$Month = 1;
+	}
+
+	location.href = "calendar0520.html?year=" + $Year + "&month=" + $Month;
+}
+/*********************************
+ *　月変更（-1） 　       　     *
+ *********************************/
+function DownMonth($Year,$Month){
+	if($Month!=1){
+		$Month = $Month - 1;
+	}else{
+		$Year  = $Year - 1;
+		$Month = 12;
+	}
+
+	location.href = "calendar0520.html?year=" + $Year + "&month=" + $Month;
+}
+//-->
+</Script>
+<script type="text/javascript">
+    window.onload = function() {
+        // PHPで判定した結果をJavaScript変数に渡す
+        var isBeyondSixMonths = false;
+        
+        // 判定がtrueなら「次月」を非表示にする
+        if (isBeyondSixMonths) {
+            document.getElementById("nextmonth").style.display = "none";
+        }
+    };
+</script>
+</head>
+
+<body>
+<form name="CalList" method="post">
+<table id="calender">
+		<tr id="t_head">
+			<td colspan="2">
+
+    			</td>
+			<td colspan="3">
+				<span id="nowmonth">2025年6月</span>
+			</td>
+			<td colspan="2">
+				<a id="nextmonth" href="JavaScript:void(0);" OnClick= "UpMonth(2025,6)">次月 &raquo;</a>
+			</td>
+		</tr>
+		<tr>
+			<th class="sun" align="center" valign="middle" style="color: red">日</th>
+			<th align="center" valign="middle">月</th>
+			<th align="center" valign="middle">火</th>
+			<th align="center" valign="middle">水</th>
+			<th align="center" valign="middle">木</th>
+			<th align="center" valign="middle">金</th>
+			<th class="sat" align="center" valign="middle" style="color: blue">土</th>
+		</tr>
+
+<!-- PHP開始 -->
+<tr><td class="sun" align="center" valign="middle">1</td><td align="center" valign="middle">2</td><td align="center" valign="middle">3</td><td align="center" valign="middle">4</td><td align="center" valign="middle">5</td><td align="center" valign="middle">6</td><td class="sat" align="center" valign="middle">7</td></tr><tr><td class="sun">　</td><td>　</td><td>　</td><td>　</td><td>　</td><td>　</td><td class="sat">　</td></tr><tr><td class="sun" align="center" valign="middle">8</td><td align="center" valign="middle">9</td><td align="center" valign="middle">10</td><td align="center" valign="middle">11</td><td align="center" valign="middle">12</td><td align="center" valign="middle">13</td><td class="sat" align="center" valign="middle">14</td></tr><tr><td class="sun">　</td><td>　</td><td>　</td><td>×</td><td>×</td><td><a href='../booking-form/index.html#section2' target='_parent'>CREA ○</a></td><td class="sat"><a href='../booking-form/index.html#section2' target='_parent'>CREA ○</a></td></tr><tr><td class="sun" align="center" valign="middle">15</td><td align="center" valign="middle">16</td><td align="center" valign="middle">17</td><td align="center" valign="middle">18</td><td align="center" valign="middle">19</td><td align="center" valign="middle">20</td><td class="sat" align="center" valign="middle">21</td></tr><tr><td class="sun"><a href='../booking-form/index.html#section2' target='_parent'>CREA ○</a></td><td><a href='../booking-form/index.html#section2' target='_parent'>CREA ○</a></td><td><a href='../booking-form/index.html#section2' target='_parent'>◎</a></td><td><a href='../booking-form/index.html#section2' target='_parent'>◎</a></td><td><a href='../booking-form/index.html#section2' target='_parent'>◎</a></td><td><a href='../booking-form/index.html#section2' target='_parent'>◎</a></td><td class="sat"><a href='../booking-form/index.html#section2' target='_parent'>◎</a></td></tr><tr><td class="sun" align="center" valign="middle">22</td><td align="center" valign="middle">23</td><td align="center" valign="middle">24</td><td align="center" valign="middle">25</td><td align="center" valign="middle">26</td><td align="center" valign="middle">27</td><td class="sat" align="center" valign="middle">28</td></tr><tr><td class="sun"><a href='../booking-form/index.html#section2' target='_parent'>◎</a></td><td><a href='../booking-form/index.html#section2' target='_parent'>◎</a></td><td><a href='../booking-form/index.html#section2' target='_parent'>◎</a></td><td><a href='../booking-form/index.html#section2' target='_parent'>◎</a></td><td><a href='../booking-form/index.html#section2' target='_parent'>◎</a></td><td><a href='../booking-form/index.html#section2' target='_parent'>◎</a></td><td class="sat"><a href='../booking-form/index.html#section2' target='_parent'>◎</a></td></tr><tr><td class="sun" align="center" valign="middle">29</td><td align="center" valign="middle">30</td><td style="border-bottom-style:none;background: #eee;">　</td><td style="border-bottom-style:none;background: #eee;">　</td><td style="border-bottom-style:none;background: #eee;">　</td><td style="border-bottom-style:none;background: #eee;">　</td><td style="border-bottom-style:none;background: #eee;">　</td></tr><tr><td class="sun"><a href='../booking-form/index.html#section2' target='_parent'>◎</a></td><td><a href='../booking-form/index.html#section2' target='_parent'>◎</a></td><td style="border-top-style:none;background: #eee;">　</td><td style="border-top-style:none;background: #eee;">　</td><td style="border-top-style:none;background: #eee;">　</td><td style="border-top-style:none;background: #eee;">　</td><td style="border-top-style:none;background: #eee;">　</td></tr>
+<!-- PHP終了 -->
+	</table>
+</form>
+<P><FONT size="-1">◎→空きあり／ZIL ○→ZILのみ空きあり／CREA ○→CREAのみ空きあり／×→空き無し </FONT></P>
+</body>
+
+<!-- Mirrored from kpi-campingcar.com/calendar/calendar.php by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Jun 2025 02:54:53 GMT -->
+</html>

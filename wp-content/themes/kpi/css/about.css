@@ -1,0 +1,121 @@
+main section article{
+	max-width:1080px;
+	margin:0 auto;
+}
+#section1 .inner{
+	display:flex;
+	gap:60px;
+}
+#section1 .inner figure{
+	width:341px;
+	flex:none;
+}
+#section1 .inner address{
+	width:calc(100% - 401px);
+	flex:none;
+	font-style:normal;
+	font-family: "fot-chiaro-std", sans-serif;
+font-weight: 700;
+font-style: normal;
+}
+
+#section1 .inner address .font_m{
+	font-size:32px;
+}
+#section1 .inner .tel strong{
+	font-size:48px;
+}
+#section1 .inner iframe{
+	display:block;
+	margin:40px auto 0;
+	width:100%;
+}
+main section table {
+	width: 100%;
+}
+
+main section th {
+	white-space: nowrap;
+	text-align: left;
+	padding: 10px 0;
+	font-weight:normal;
+	vertical-align: top;
+}
+
+main section td {
+	padding: 10px 10px 10px 50px;
+	vertical-align: top;
+}
+
+.hissu {
+	color: #cf6b4b;
+	float:right;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	width: 100%;
+	padding: 5px;
+	box-sizing: border-box;
+}
+
+select {
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	width: 200px;
+	padding: 5px;
+	box-sizing: border-box;
+}
+
+.year {
+	width: 100px !important;
+}
+
+.gakureki {
+	width: 300px !important;
+	margin: 0 0 10px;
+}
+
+.month,
+.day {
+	width: 60px !important;
+	margin-left: 20px !important;
+}
+
+input.radio {
+	width: auto;
+}
+
+#tel {
+	width: 320px !important;
+}
+
+#submit_btn{
+	text-align:center;
+}
+#submit_btn input {
+	display:block;
+	margin:0 auto;
+	width:467px;
+	line-height:57px;
+	text-decoration:none;
+	color:#000;
+	text-align:center;
+	border:0;
+	background:url('../images/common/footer_contact.webp') no-repeat;
+}
+
+#address1 {
+	width: 100px;
+}
+#section3 h4{
+	padding:50px 0 20px;
+	text-align:left;
+}
+#section3 ul{
+	padding:0 0 0 20px;
+}
