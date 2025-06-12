@@ -177,7 +177,7 @@ function initializeChatWidget() {
                     pElement.innerHTML = 'サーバーに接続しています、30~50秒お待ちいただく場合があります...';
                 }
             }
-        }, 3000); // 3000ミリ秒 = 3秒
+        }, 5000); // 5000ミリ秒 = 5秒
 
         try {
             const response = await fetch(`${SERVER_URL}/api/chat`, {
