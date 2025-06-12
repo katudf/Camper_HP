@@ -15,170 +15,138 @@ function initializeChatWidget() {
     const messagesContainer = document.getElementById('chat-widget-messages');
     const chatInput = document.getElementById('chat-widget-input');
     const sendButton = document.getElementById('chat-widget-send-button');
-
     const SERVER_URL = 'https://camper-chatbot.onrender.com';
 
-    // --- 状態の復元 ---
-    function restoreState() {
-        const stateJSON = sessionStorage.getItem('chatWidgetState');
-        chatContainer.style.top = 'auto';
-        chatContainer.style.left = 'auto';
-        if (stateJSON) {
-            const state = JSON.parse(stateJSON);
-            if (state.isOpen) {
-                chatContainer.classList.remove('hidden');
-            }
-            chatContainer.style.right = state.right !== undefined ? `${state.right}px` : '20px';
-            chatContainer.style.bottom = state.bottom !== undefined ? `${state.bottom}px` : '20px';
-            chatContainer.style.height = state.height !== undefined ? `${state.height}px` : '450px';
-            if (state.history) {
-                messagesContainer.innerHTML = state.history;
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            } else {
-                addInitialBotMessage();
-            }
-        } else {
-            addInitialBotMessage();
-        }
-    }
+    // ▼▼▼ 状態の保存・復元、メッセージ追加・削除の関数群をここに集約 ▼▼▼
 
-    // --- 状態の保存 ---
     function saveState() {
-        if (!chatContainer) return;
+        if (!chatContainer || !messagesContainer) return;
+        
+        const messagesToSave = [];
+        messagesContainer.querySelectorAll('.chat-widget-message').forEach(msgElement => {
+            const isBot = msgElement.classList.contains('bot-message');
+            const isLoading = msgElement.classList.contains('loading-message');
+            const sender = isBot ? 'bot' : 'user';
+            
+            const pElement = msgElement.querySelector('p');
+            if(pElement){
+                 messagesToSave.push({
+                    text: pElement.innerHTML,
+                    sender: sender,
+                    isLoading: isLoading,
+                    isHTML: true
+                });
+            }
+        });
+
         const rect = chatContainer.getBoundingClientRect();
         const state = {
-            isOpen: !chatContainer.classList.contains('hidden'),
-            right: window.innerWidth - rect.right,
-            bottom: window.innerHeight - rect.bottom,
-            height: rect.height,
-            history: messagesContainer.innerHTML
+            isHidden: chatContainer.classList.contains('hidden'),
+            position: {
+                top: chatContainer.style.top,
+                left: chatContainer.style.left,
+                right: chatContainer.style.right,
+                bottom: chatContainer.style.bottom,
+                height: chatContainer.style.height,
+                width: chatContainer.style.width
+            },
+            messages: messagesToSave
         };
         sessionStorage.setItem('chatWidgetState', JSON.stringify(state));
     }
 
-// --- UI操作（開閉・新規）---
-    if (toggleButton) {
-        toggleButton.addEventListener('click', () => {
-            // 1. クリックされるたびに、位置とサイズをリセットする
-            chatContainer.style.top = 'auto';
-            chatContainer.style.left = 'auto';
-            chatContainer.style.right = '20px';
-            chatContainer.style.bottom = '20px';
-            chatContainer.style.height = '450px'; // 初期サイズ
-
-            // 2. もしウィンドウが非表示だったら、表示する
-            if (chatContainer.classList.contains('hidden')) {
-                chatContainer.classList.remove('hidden');
-            }
-            
-            // 3. 変更後の状態を保存
-            saveState();
-        });
-    }
-    if (widgetCloseButton) {
-        widgetCloseButton.addEventListener('click', () => {
-            chatContainer.classList.add('hidden');
-            saveState();
-        });
-    }
-
-    if (newChatButton) {
-        newChatButton.addEventListener('click', () => {
-            addInitialBotMessage(); 
-        });
-    }
-
-    // --- ドラッグ＆リサイズのロジック ---
-    let isDragging = false, isResizing = false;
-    let initialTop, initialLeft, initialHeight, initialMouseX, initialMouseY;
-
-    if (header) {
-        header.addEventListener('mousedown', (e) => {
-            e.preventDefault();
-            isDragging = true;
-            const rect = chatContainer.getBoundingClientRect();
-            initialLeft = rect.left;
-            initialTop = rect.top;
-            initialMouseX = e.clientX;
-            initialMouseY = e.clientY;
-            document.body.style.userSelect = 'none';
-            chatContainer.style.transition = 'none';
-        });
-    }
-
-    if (resizeHandle) {
-        resizeHandle.addEventListener('mousedown', (e) => {
-            e.preventDefault();
-            isResizing = true;
-            const rect = chatContainer.getBoundingClientRect();
-            initialHeight = rect.height;
-            initialMouseY = e.clientY;
-            chatContainer.style.top = `${rect.top}px`;
-            chatContainer.style.bottom = 'auto';
-            document.body.style.userSelect = 'none';
-            chatContainer.style.transition = 'none';
-        });
-    }
-
-    window.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-            const dx = e.clientX - initialMouseX;
-            const dy = e.clientY - initialMouseY;
-            chatContainer.style.left = `${initialLeft + dx}px`;
-            chatContainer.style.top = `${initialTop + dy}px`;
-            chatContainer.style.bottom = 'auto';
-            chatContainer.style.right = 'auto';
+    function loadState() {
+        const stateJSON = sessionStorage.getItem('chatWidgetState');
+        if (!stateJSON) {
+            addInitialBotMessage();
+            return;
         }
-        if (isResizing) {
-            const dy = e.clientY - initialMouseY;
-            const newHeight = initialHeight + dy;
-            const minHeight = 250;
-            const maxHeight = window.innerHeight * 0.9;
-            if (newHeight >= minHeight && newHeight <= maxHeight) {
-                chatContainer.style.height = `${newHeight}px`;
-            }
+        const state = JSON.parse(stateJSON);
+        if (messagesContainer) {
+            messagesContainer.innerHTML = '';
         }
-    });
-
-    window.addEventListener('mouseup', () => {
-        if (isDragging || isResizing) {
-            document.body.style.userSelect = '';
-            chatContainer.style.transition = '';
-            saveState();
-            const rect = chatContainer.getBoundingClientRect();
-            chatContainer.style.right = `${window.innerWidth - rect.right}px`;
-            chatContainer.style.bottom = `${window.innerHeight - rect.bottom}px`;
-            chatContainer.style.top = 'auto';
-            chatContainer.style.left = 'auto';
-            isDragging = false;
-            isResizing = false;
+        if (state.messages && state.messages.length > 0) {
+            state.messages.forEach(msg => {
+                addMessage(msg.text, msg.sender, msg.isLoading, msg.isHTML);
+            });
+        } else {
+            addInitialBotMessage();
         }
-    });
-
-    // --- チャット機能 ---
-    let userId = localStorage.getItem('chatbotUserId');
-    if (!userId) {
-        userId = `user_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
-        localStorage.setItem('chatbotUserId', userId);
+        if (chatContainer) {
+            state.isHidden ? chatContainer.classList.add('hidden') : chatContainer.classList.remove('hidden');
+        }
+        if (chatContainer && state.position) {
+            chatContainer.style.top = state.position.top;
+            chatContainer.style.left = state.position.left;
+            chatContainer.style.right = state.position.right;
+            chatContainer.style.bottom = state.position.bottom;
+            chatContainer.style.height = state.position.height;
+            chatContainer.style.width = state.position.width;
+        }
     }
     
-    if (chatInput) {
-        chatInput.addEventListener('input', () => { sendButton.disabled = chatInput.value.trim() === ''; });
-        chatInput.addEventListener('keypress', (event) => { if (event.key === 'Enter' && !sendButton.disabled) handleSendMessage(); });
+    function addMessage(text, sender, isLoading = false, isHTML = false) {
+        const messageId = `msg-${Date.now()}-${Math.random()}`;
+        const messageElement = document.createElement('div');
+        messageElement.id = messageId;
+        messageElement.classList.add('chat-widget-message', `${sender}-message`);
+        const pElement = document.createElement('p');
+
+        if (isLoading) {
+            messageElement.classList.add('loading-message');
+        }
+
+        if (isHTML) {
+            // 履歴復元や思考中メッセージは、保存されたHTMLをそのまま（サニタイズ済みとして）解釈
+             if (typeof DOMPurify !== 'undefined') {
+                 // 履歴復元の際、リンクにtarget属性がなくても許可してしまうのを防ぐ
+                pElement.innerHTML = DOMPurify.sanitize(text);
+             } else {
+                pElement.innerHTML = text;
+             }
+        } else if (sender === 'bot') {
+            // 新規のBotメッセージはリンクを生成
+            const htmlWithLinks = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" rel="noopener noreferrer">$1</a>');
+            if (typeof DOMPurify !== 'undefined') {
+                pElement.innerHTML = DOMPurify.sanitize(htmlWithLinks);
+            } else {
+                pElement.innerHTML = htmlWithLinks;
+            }
+        } else {
+            pElement.textContent = text;
+        }
+
+        messageElement.appendChild(pElement);
+        if (messagesContainer) {
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        return messageElement;
     }
-    
-    if (sendButton) { sendButton.addEventListener('click', handleSendMessage); }
+
+    function removeMessage(messageId) {
+        const messageToRemove = document.getElementById(messageId);
+        if (messageToRemove) { messageToRemove.remove(); }
+    }
+
+    function addInitialBotMessage() {
+        if (!messagesContainer) return;
+        messagesContainer.innerHTML = '';
+        addMessage('こんにちは！キャンピングカーに関するご質問にAIがお答えします。', 'bot', false, false);
+        saveState();
+    }
 
     async function handleSendMessage() {
         const messageText = chatInput.value.trim();
         if (!messageText) return;
         chatInput.value = '';
         sendButton.disabled = true;
-        addMessage(messageText, 'user');
+        addMessage(messageText, 'user', false, false); 
         saveState();
+        
         const thinkingHTML = 'AIが思考中です<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>';
-        // HTMLを渡して思考中メッセージを生成
-        const loadingMessageElement = addMessage(thinkingHTML, 'bot', true);
+        const loadingMessageElement = addMessage(thinkingHTML, 'bot', true, true); 
+        
         try {
             const response = await fetch(`${SERVER_URL}/api/chat`, {
                 method: 'POST',
@@ -191,63 +159,107 @@ function initializeChatWidget() {
             }
             const data = await response.json();
             removeMessage(loadingMessageElement.id);
-            addMessage(data.reply, 'bot');
+            addMessage(data.reply, 'bot', false, false); // Botからの新規返信はisHTML=falseでリンクを自動生成させる
         } catch (error) {
             console.error('通信エラー:', error);
             removeMessage(loadingMessageElement.id);
-            addMessage('申し訳ありません、通信エラーが発生しました。', 'bot');
+            addMessage('申し訳ありません、通信エラーが発生しました。', 'bot', false, false);
         } finally {
             saveState();
         }
     }
 
-function addMessage(text, sender, isLoading = false) {
-    const messageId = `msg-${Date.now()}-${Math.random()}`;
-    const messageElement = document.createElement('div');
-    messageElement.id = messageId;
-    messageElement.classList.add('chat-widget-message', `${sender}-message`);
-    const pElement = document.createElement('p');
 
-    if (isLoading) {
-        messageElement.classList.add('loading-message');
-        // ▼▼▼ ここを修正 ▼▼▼
-        // 思考中メッセージ(HTML)をサニタイズして設定
-        if (typeof DOMPurify !== 'undefined') {
-            pElement.innerHTML = DOMPurify.sanitize(text);
-        } else {
-            pElement.innerHTML = text;
+    // --- UI操作（開閉・新規）---
+    if (toggleButton) {
+        toggleButton.addEventListener('click', () => {
+            chatContainer.style.top = 'auto';
+            chatContainer.style.left = 'auto';
+            chatContainer.style.right = '20px';
+            chatContainer.style.bottom = '20px';
+            chatContainer.style.height = '450px';
+            if (chatContainer.classList.contains('hidden')) {
+                chatContainer.classList.remove('hidden');
+            }
+            saveState();
+        });
+    }
+    if (widgetCloseButton) {
+        widgetCloseButton.addEventListener('click', () => {
+            chatContainer.classList.add('hidden');
+            saveState();
+        });
+    }
+    if (newChatButton) {
+        newChatButton.addEventListener('click', () => {
+            addInitialBotMessage();
+        });
+    }
+
+    // --- ドラッグ＆リサイズのロジック ---
+    let isDragging = false, isResizing = false;
+    let initialTop, initialLeft, initialHeight, initialMouseX, initialMouseY;
+    if (header) {
+        header.addEventListener('mousedown', (e) => {
+            e.preventDefault(); isDragging = true;
+            const rect = chatContainer.getBoundingClientRect();
+            initialLeft = rect.left; initialTop = rect.top;
+            initialMouseX = e.clientX; initialMouseY = e.clientY;
+            document.body.style.userSelect = 'none';
+            chatContainer.style.transition = 'none';
+        });
+    }
+    if (resizeHandle) {
+        resizeHandle.addEventListener('mousedown', (e) => {
+            e.preventDefault(); isResizing = true;
+            const rect = chatContainer.getBoundingClientRect();
+            initialHeight = rect.height; initialMouseY = e.clientY;
+            chatContainer.style.top = `${rect.top}px`;
+            chatContainer.style.bottom = 'auto';
+            document.body.style.userSelect = 'none';
+            chatContainer.style.transition = 'none';
+        });
+    }
+    window.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            const dx = e.clientX - initialMouseX; const dy = e.clientY - initialMouseY;
+            chatContainer.style.left = `${initialLeft + dx}px`;
+            chatContainer.style.top = `${initialTop + dy}px`;
+            chatContainer.style.bottom = 'auto'; chatContainer.style.right = 'auto';
         }
-    } else if (sender === 'bot') {
-        const htmlWithLinks = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-        if (typeof DOMPurify !== 'undefined') {
-            pElement.innerHTML = DOMPurify.sanitize(htmlWithLinks, { ADD_ATTR: ['target'] });
-        } else {
-            pElement.innerHTML = htmlWithLinks;
+        if (isResizing) {
+            const dy = e.clientY - initialMouseY; const newHeight = initialHeight + dy;
+            const minHeight = 250; const maxHeight = window.innerHeight * 0.9;
+            if (newHeight >= minHeight && newHeight <= maxHeight) {
+                chatContainer.style.height = `${newHeight}px`;
+            }
         }
-    } else {
-        pElement.textContent = text;
-    }
+    });
+    window.addEventListener('mouseup', () => {
+        if (isDragging || isResizing) {
+            document.body.style.userSelect = '';
+            chatContainer.style.transition = '';
+            const rect = chatContainer.getBoundingClientRect();
+            chatContainer.style.right = `${window.innerWidth - rect.right}px`;
+            chatContainer.style.bottom = `${window.innerHeight - rect.bottom}px`;
+            chatContainer.style.top = 'auto'; chatContainer.style.left = 'auto';
+            isDragging = false; isResizing = false;
+            saveState();
+        }
+    });
 
-    messageElement.appendChild(pElement);
-    if (messagesContainer) {
-        messagesContainer.appendChild(messageElement);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    // --- チャット機能 ---
+    let userId = localStorage.getItem('chatbotUserId');
+    if (!userId) {
+        userId = `user_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+        localStorage.setItem('chatbotUserId', userId);
     }
-    return messageElement;
-}
-
-    function removeMessage(messageId) {
-        const messageToRemove = document.getElementById(messageId);
-        if (messageToRemove) { messageToRemove.remove(); }
+    if (chatInput) {
+        chatInput.addEventListener('input', () => { sendButton.disabled = chatInput.value.trim() === ''; });
+        chatInput.addEventListener('keypress', (event) => { if (event.key === 'Enter' && !sendButton.disabled) handleSendMessage(); });
     }
+    if (sendButton) { sendButton.addEventListener('click', handleSendMessage); }
 
-    function addInitialBotMessage() {
-        if (!messagesContainer) return;
-        messagesContainer.innerHTML = '';
-        addMessage('こんにちは！キャンピングカーに関するご質問にAIがお答えします。', 'bot');
-        saveState();
-    }
-
-    // --- 初期化実行 ---
-    restoreState();
+    // --- ★★★ 初期化実行 ★★★ ---
+    loadState(); 
 }
