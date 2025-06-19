@@ -43,20 +43,36 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 45px;
+    height: 65px; /* ★★★ 修正点: 注意書きを含めるため高さを広げる ★★★ */
     background-color: #26ae10;
     color: white;
-    padding: 0 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 5px 15px; /* パディングを調整 */
+    display: flex; /* Flexboxを再度利用して中身を整える */
+    flex-direction: column;
+    justify-content: center;
     cursor: move;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     z-index: 3;
-    /* バージョン表示のための追記 */
     position: relative;
 }
+
+/* ★★★ 以下を新しく追加 ★★★ */
+.chat-widget-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#chat-widget-disclaimer {
+    font-size: 10px; /* バージョン表示と同じくらいのサイズ */
+    font-weight: normal;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 4px;
+    text-align: center;
+}
+/* ★★★ 追加ここまで ★★★ */
 #chat-widget-title {
     font-weight: bold;
 }
@@ -101,7 +117,7 @@
 /* メッセージ表示エリア */
 #chat-widget-messages {
     position: absolute;
-    top: 45px;
+    top: 65px;      /* ★★★ 修正点: ヘッダーの新しい高さ分、上を空ける ★★★ */
     bottom: 55px;
     left: 0;
     right: 0;

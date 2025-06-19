@@ -75,7 +75,7 @@
                             <button id="chat-widget-close-button">×</button>
                         </div>
                     </div>
-                    <div id="chat-widget-disclaimer" style="font-size: 0.8em; text-align: center; padding-top: 2px;">AIの回答は不正確な場合があります。正確な情報はお問い合わせください。</div>
+                    <div id="chat-widget-disclaimer">AIの回答は不正確な場合があります。正確な情報はお問い合わせください。</div>
                 </div>
             <div id="chat-widget-content">
                 <div id="chat-widget-messages"></div>
