@@ -217,21 +217,39 @@ function initializeChatWidget() {
     // --- UI操作（開閉・新規）---
     if (toggleButton) {
         toggleButton.addEventListener('click', () => {
-            chatContainer.style.top = 'auto';
-            chatContainer.style.left = 'auto';
-            chatContainer.style.right = '20px';
-            chatContainer.style.bottom = '20px';
-            chatContainer.style.height = '600px'; // 高さを再設定
-            chatContainer.style.width = '370px'; // 幅を再設定
-
-            checkViewport(); // ★★★★★ 表示する前にビューポートをチェック ★★★★★
-
+            // スマホ表示ならインラインスタイルをリセット
+            if (window.innerWidth <= 600) {
+                chatContainer.style.top = '';
+                chatContainer.style.left = '';
+                chatContainer.style.right = '';
+                chatContainer.style.bottom = '';
+                chatContainer.style.height = '';
+                chatContainer.style.width = '';
+            } else {
+                chatContainer.style.top = 'auto';
+                chatContainer.style.left = 'auto';
+                chatContainer.style.right = '20px';
+                chatContainer.style.bottom = '20px';
+                chatContainer.style.height = '600px';
+                chatContainer.style.width = '370px';
+            }
+            checkViewport();
             if (chatContainer.classList.contains('hidden')) {
                 chatContainer.classList.remove('hidden');
             }
             saveState();
         });
     }
+
+    // fullscreen-widgetクラス付与時はインラインサイズをリセット
+    const observer = new MutationObserver(() => {
+        if (chatContainer.classList.contains('fullscreen-widget')) {
+            chatContainer.style.width = '';
+            chatContainer.style.height = '';
+        }
+    });
+    observer.observe(chatContainer, { attributes: true, attributeFilter: ['class'] });
+
     if (widgetCloseButton) {
         widgetCloseButton.addEventListener('click', () => {
             chatContainer.classList.add('hidden');
