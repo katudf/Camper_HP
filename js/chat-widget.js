@@ -1,45 +1,27 @@
 // js/chat-widget.js (ボタンクリックで位置をリセットする修正版)
 
+// js/chat-widget.js の initializeChatWidget 関数を置き換える
+
 function initializeChatWidget() {
     // 既に初期化済みの場合は何もしない
     if (window.chatWidgetInitialized) return;
     window.chatWidgetInitialized = true;
 
     // バージョン情報を非同期で取得して表示する
-    async function fetchAndDisplayVersion() {
-        try {
-            const versionDisplay = document.getElementById('prompt-version-display');
-            if (!versionDisplay) return;
-
-            const response = await fetch('https://camper-chatbot.onrender.com/api/get_active_prompt_version');
-            if (response.ok) {
-                const data = await response.json();
-                if (data.version) {
-                    versionDisplay.textContent = `v${data.version}`;
-                }
-            }
-        } catch (error) {
-            console.error('Failed to fetch prompt version:', error);
-        }
-    }
+    async function fetchAndDisplayVersion() { /* ... この関数の内容は変更なし ... */ }
     fetchAndDisplayVersion();
 
     // --- 要素の取得 ---
     const toggleButton = document.getElementById('ai-chat-toggle-button');
     const chatContainer = document.getElementById('chat-widget-container');
-    const widgetCloseButton = document.getElementById('chat-widget-close-button');
-    const newChatButton = document.getElementById('chat-widget-new-button');
-    const header = document.getElementById('chat-widget-header');
-    const resizeHandle = document.getElementById('chat-widget-resize-handle');
-    const messagesContainer = document.getElementById('chat-widget-messages');
-    const chatInput = document.getElementById('chat-widget-input');
-    const sendButton = document.getElementById('chat-widget-send-button');
+    // ... (他の要素取得も変更なし) ...
     const SERVER_URL = 'https://camper-chatbot.onrender.com';
 
-    // --- ★★★★★ ここからが新しいロジック ★★★★★ ---
+    // --- ★★★ 新しいシンプルなロジック ★★★ ---
 
     // 画面幅に応じてフルスクリーンクラスを付け外しする関数
     function checkViewport() {
+        if (!chatContainer) return;
         if (window.innerWidth <= 600) {
             chatContainer.classList.add('fullscreen-widget');
         } else {
@@ -47,210 +29,21 @@ function initializeChatWidget() {
         }
     }
 
-    // ★★★★★ ウィンドウのリサイズ時にもチェックを実行 ★★★★★
+    // ウィンドウのリサイズ時にもチェックを実行
     window.addEventListener('resize', checkViewport);
-
-    // --- 状態の保存・復元、メッセージ追加・削除の関数群（変更なし） ---
-    function saveState() {
-        if (!chatContainer || !messagesContainer) return;
-        
-        const messagesToSave = [];
-        messagesContainer.querySelectorAll('.chat-widget-message').forEach(msgElement => {
-            const isBot = msgElement.classList.contains('bot-message');
-            const isLoading = msgElement.classList.contains('loading-message');
-            const sender = isBot ? 'bot' : 'user';
-            
-            const pElement = msgElement.querySelector('p');
-            if(pElement){
-                 messagesToSave.push({
-                    text: pElement.innerHTML,
-                    sender: sender,
-                    isLoading: isLoading,
-                    isHTML: true
-                });
-            }
-        });
-
-        const rect = chatContainer.getBoundingClientRect();
-        const state = {
-            isHidden: chatContainer.classList.contains('hidden'),
-            position: {
-                top: chatContainer.style.top,
-                left: chatContainer.style.left,
-                right: chatContainer.style.right,
-                bottom: chatContainer.style.bottom,
-                height: chatContainer.style.height,
-                width: chatContainer.style.width
-            },
-            messages: messagesToSave
-        };
-        sessionStorage.setItem('chatWidgetState', JSON.stringify(state));
-    }
-
-    function loadState() {
-        const stateJSON = sessionStorage.getItem('chatWidgetState');
-        if (!stateJSON) {
-            addInitialBotMessage();
-            return;
-        }
-        const state = JSON.parse(stateJSON);
-        if (messagesContainer) {
-            messagesContainer.innerHTML = '';
-        }
-        if (state.messages && state.messages.length > 0) {
-            state.messages.forEach(msg => {
-                addMessage(msg.text, msg.sender, msg.isLoading, msg.isHTML);
-            });
-        } else {
-            addInitialBotMessage();
-        }
-        if (chatContainer) {
-            state.isHidden ? chatContainer.classList.add('hidden') : chatContainer.classList.remove('hidden');
-        }
-        if (chatContainer && state.position) {
-            chatContainer.style.top = state.position.top;
-            chatContainer.style.left = state.position.left;
-            chatContainer.style.right = state.position.right;
-            chatContainer.style.bottom = state.position.bottom;
-            chatContainer.style.height = state.position.height;
-            chatContainer.style.width = state.position.width;
-        }
-    }
-    
-    function addMessage(text, sender, isLoading = false, isHTML = false) {
-        const messageId = `msg-${Date.now()}-${Math.random()}`;
-        const messageElement = document.createElement('div');
-        messageElement.id = messageId;
-        messageElement.classList.add('chat-widget-message', `${sender}-message`);
-        const pElement = document.createElement('p');
-
-        if (isLoading) {
-            messageElement.classList.add('loading-message');
-        }
-
-        if (isHTML) {
-            // 履歴復元や思考中メッセージは、保存されたHTMLをそのまま（サニタイズ済みとして）解釈
-             if (typeof DOMPurify !== 'undefined') {
-                 // 履歴復元の際、リンクにtarget属性がなくても許可してしまうのを防ぐ
-                pElement.innerHTML = DOMPurify.sanitize(text);
-             } else {
-                pElement.innerHTML = text;
-             }
-        } else if (sender === 'bot') {
-            // 新規のBotメッセージはリンクを生成
-            const htmlWithLinks = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" rel="noopener noreferrer">$1</a>');
-            if (typeof DOMPurify !== 'undefined') {
-                pElement.innerHTML = DOMPurify.sanitize(htmlWithLinks);
-            } else {
-                pElement.innerHTML = htmlWithLinks;
-            }
-        } else {
-            pElement.textContent = text;
-        }
-
-        messageElement.appendChild(pElement);
-        if (messagesContainer) {
-            messagesContainer.appendChild(messageElement);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-        return messageElement;
-    }
-
-    function removeMessage(messageId) {
-        const messageToRemove = document.getElementById(messageId);
-        if (messageToRemove) { messageToRemove.remove(); }
-    }
-
-    function addInitialBotMessage() {
-        if (!messagesContainer) return;
-        messagesContainer.innerHTML = '';
-        addMessage('こんにちは！キャンピングカーに関するご質問にAIがお答えします。', 'bot', false, false);
-        saveState();
-    }
-
-    async function handleSendMessage() {
-        const messageText = chatInput.value.trim();
-        if (!messageText) return;
-        chatInput.value = '';
-        sendButton.disabled = true;
-        addMessage(messageText, 'user', false, false); 
-        saveState();
-        
-        const thinkingHTML = 'AIが思考中です<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>';
-        const loadingMessageElement = addMessage(thinkingHTML, 'bot', true, true); 
-        
-        // ▼▼▼ 3秒後にメッセージを変更するタイマーを設定 ▼▼▼
-        const timeoutId = setTimeout(() => {
-            // loadingMessageElementがまだ画面に存在する場合のみ実行
-            if (document.getElementById(loadingMessageElement.id)) {
-                const pElement = loadingMessageElement.querySelector('p');
-                if (pElement) {
-                    pElement.innerHTML = 'サーバーに接続しています、30~50秒お待ちいただく場合があります...';
-                }
-            }
-        }, 5000); // 5000ミリ秒 = 5秒
-
-        try {
-            const response = await fetch(`${SERVER_URL}/api/chat`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: messageText, userId: userId }),
-            });
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.reply || 'サーバーエラーが発生しました。');
-            }
-            const data = await response.json();
-            removeMessage(loadingMessageElement.id);
-            addMessage(data.reply, 'bot', false, false); 
-        } catch (error) {
-            console.error('通信エラー:', error);
-            removeMessage(loadingMessageElement.id);
-            addMessage('申し訳ありません、通信エラーが発生しました。', 'bot', false, false);
-        } finally {
-            // ▼▼▼ 応答が返ってきたら、必ずタイマーを解除 ▼▼▼
-            clearTimeout(timeoutId);
-            saveState();
-        }
-    }
 
     // --- UI操作（開閉・新規）---
     if (toggleButton) {
         toggleButton.addEventListener('click', () => {
-            // スマホ表示ならインラインスタイルをリセット（insetもリセット）
-            if (window.innerWidth <= 600) {
-                chatContainer.style.top = '';
-                chatContainer.style.left = '';
-                chatContainer.style.right = '';
-                chatContainer.style.bottom = '';
-                chatContainer.style.height = '';
-                chatContainer.style.width = '';
-                chatContainer.style.inset = '';
-            } else {
-                chatContainer.style.top = 'auto';
-                chatContainer.style.left = 'auto';
-                chatContainer.style.right = '20px';
-                chatContainer.style.bottom = '20px';
-                chatContainer.style.height = '600px';
-                chatContainer.style.width = '370px';
-                chatContainer.style.inset = '';
-            }
-            checkViewport();
-            if (chatContainer.classList.contains('hidden')) {
-                chatContainer.classList.remove('hidden');
+            // 表示/非表示を切り替えるだけのシンプルな処理に変更
+            chatContainer.classList.toggle('hidden');
+            // 表示された時に、再度ビューポートをチェックしてスタイルを確定させる
+            if (!chatContainer.classList.contains('hidden')) {
+                checkViewport();
             }
             saveState();
         });
     }
-
-    // fullscreen-widgetクラス付与時はインラインサイズをリセット
-    const observer = new MutationObserver(() => {
-        if (chatContainer.classList.contains('fullscreen-widget')) {
-            chatContainer.style.width = '';
-            chatContainer.style.height = '';
-        }
-    });
-    observer.observe(chatContainer, { attributes: true, attributeFilter: ['class'] });
 
     if (widgetCloseButton) {
         widgetCloseButton.addEventListener('click', () => {
@@ -258,11 +51,19 @@ function initializeChatWidget() {
             saveState();
         });
     }
+
     if (newChatButton) {
         newChatButton.addEventListener('click', () => {
             addInitialBotMessage();
         });
     }
+
+    // ... (これ以降の、状態保存・メッセージ送受信・ドラッグ＆リサイズのロジックは、あなたが提供した最新のコードのままでOKです) ...
+
+    // --- ★★★ 初期化実行 ★★★ ---
+    loadState();
+    checkViewport(); // 初期読み込み時にもチェックを実行
+}
 
     // --- ドラッグ＆リサイズのロジック ---
     let isDragging = false, isResizing = false;
@@ -331,4 +132,3 @@ function initializeChatWidget() {
     // --- ★★★ 初期化実行 ★★★ ---
     loadState();
     checkViewport(); // ★★★★★ 初期読み込み時にもチェックを実行 ★★★★★
-}
