@@ -226,3 +226,31 @@
         opacity: 1;
     }
 }
+/* 回転アニメーションの定義 */
+@keyframes rotate-animation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 新規ボタンのスタイルを調整 */
+#chat-widget-new-button {
+  /* アイコンを中央に配置するための設定 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* 見た目の微調整 */
+  padding: 5px;
+  line-height: 1;
+  width: 28px;  /* ボタンを正方形に近づける */
+  height: 28px;
+}
+
+/* アイコンにアニメーションを適用 */
+.new-chat-icon {
+  animation: rotate-animation 2s linear infinite;
+}
