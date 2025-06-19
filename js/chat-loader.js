@@ -67,11 +67,15 @@
         const widgetHTML = `
             <div id="chat-widget-container" class="hidden">
                 <div id="chat-widget-header">
-                    <span id="chat-widget-title">AIに相談</span>
-                    <span id="prompt-version-display"></span>  <div class="chat-header-buttons">
-                        <button id="chat-widget-new-button">新規</button>
-                        <button id="chat-widget-close-button">×</button>
+                    <div class="chat-widget-header-top">
+                        <span id="chat-widget-title">AIに相談</span>
+                        <span id="prompt-version-display"></span>
+                        <div class="chat-header-buttons">
+                            <button id="chat-widget-new-button">新規</button>
+                            <button id="chat-widget-close-button">×</button>
+                        </div>
                     </div>
+                    <div id="chat-widget-disclaimer" style="font-size: 0.8em; text-align: center; padding-top: 2px;">AIの回答は不正確な場合があります。正確な情報はお問い合わせください。</div>
                 </div>
             <div id="chat-widget-content">
                 <div id="chat-widget-messages"></div>
