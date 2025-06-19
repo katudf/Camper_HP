@@ -217,7 +217,7 @@ function initializeChatWidget() {
     // --- UI操作（開閉・新規）---
     if (toggleButton) {
         toggleButton.addEventListener('click', () => {
-            // スマホ表示ならインラインスタイルをリセット
+            // スマホ表示ならインラインスタイルをリセット（insetもリセット）
             if (window.innerWidth <= 600) {
                 chatContainer.style.top = '';
                 chatContainer.style.left = '';
@@ -225,6 +225,7 @@ function initializeChatWidget() {
                 chatContainer.style.bottom = '';
                 chatContainer.style.height = '';
                 chatContainer.style.width = '';
+                chatContainer.style.inset = '';
             } else {
                 chatContainer.style.top = 'auto';
                 chatContainer.style.left = 'auto';
@@ -232,6 +233,7 @@ function initializeChatWidget() {
                 chatContainer.style.bottom = '20px';
                 chatContainer.style.height = '600px';
                 chatContainer.style.width = '370px';
+                chatContainer.style.inset = '';
             }
             checkViewport();
             if (chatContainer.classList.contains('hidden')) {
