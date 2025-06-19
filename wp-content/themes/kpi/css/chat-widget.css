@@ -24,14 +24,16 @@
 /* チャットウィジェットの基本スタイル */
 #chat-widget-container {
     position: fixed;
+    right: 20px;
+    bottom: 20px;
     width: 370px;
     height: 600px;
-    min-height: 250px;
-    max-height: 90vh;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     z-index: 10000;
+    display: flex; /* ★★★ Flexboxレイアウトに変更 ★★★ */
+    flex-direction: column;
 }
 #chat-widget-container.hidden {
     display: none;
@@ -39,51 +41,42 @@
 
 /* ウィジェットヘッダー */
 #chat-widget-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 65px; /* ★★★ 修正点: 注意書きを含めるため高さを広げる ★★★ */
+    height: 65px;
+    flex-shrink: 0; /* ヘッダーは縮まないようにする */
     background-color: #26ae10;
     color: white;
-    padding: 5px 15px; /* パディングを調整 */
-    display: flex; /* Flexboxを再度利用して中身を整える */
+    padding: 5px 15px;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     cursor: move;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    z-index: 3;
     position: relative;
 }
-
-/* ★★★ 以下を新しく追加 ★★★ */
 .chat-widget-header-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
 }
-
-#chat-widget-disclaimer {
-    font-size: 10px; /* バージョン表示と同じくらいのサイズ */
-    font-weight: normal;
-    color: rgba(255, 255, 255, 0.8);
-    margin-top: 4px;
-    text-align: center;
-}
-/* ★★★ 追加ここまで ★★★ */
 #chat-widget-title {
     font-weight: bold;
 }
-/* バージョン表示のスタイル */
+#prompt-version-display,
+#chat-widget-disclaimer {
+    font-size: 10px;
+    font-weight: normal;
+    color: rgba(255, 255, 255, 0.8);
+}
 #prompt-version-display {
     position: absolute;
     bottom: 4px;
     left: 15px;
-    font-size: 10px;
-    font-weight: normal;
-    color: rgba(255, 255, 255, 0.7);
+}
+#chat-widget-disclaimer {
+    margin-top: 4px;
+    text-align: center;
 }
 .chat-header-buttons {
     display: flex;
@@ -94,15 +87,26 @@
     background: none;
     border: 1px solid rgba(255, 255, 255, 0.7);
     color: white;
-    font-size: 13px;
-    font-weight: bold;
+    font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    padding: 2px 8px;
+    padding: 4px 8px;
+    line-height: 1;
     transition: background-color 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
 }
 #chat-widget-new-button:hover {
     background-color: rgba(255, 255, 255, 0.2);
+}
+@keyframes rotate-animation {
+  from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+}
+.new-chat-icon {
+  animation: rotate-animation 2s linear infinite;
 }
 #chat-widget-close-button {
     background: none;
@@ -116,30 +120,24 @@
 
 /* メッセージ表示エリア */
 #chat-widget-messages {
-    position: absolute;
-    top: 65px;      /* ★★★ 修正点: ヘッダーの新しい高さ分、上を空ける ★★★ */
-    bottom: 55px;
-    left: 0;
-    right: 0;
+    flex-grow: 1; /* ★★★ 柔軟に高さを確保する ★★★ */
+    min-height: 0; /* ★★★ Flexboxでのスクロールに必須 ★★★ */
     padding: 15px;
     overflow-y: auto;
     background-color: #f9f9f9;
-    z-index: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* メッセージ入力エリア */
 #chat-widget-input-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
     height: 55px;
+    flex-shrink: 0; /* 入力欄は縮まないようにする */
     display: flex;
     align-items: center;
     padding: 0 10px;
     border-top: 1px solid #ddd;
     background-color: #fff;
-    z-index: 3;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -171,111 +169,31 @@
     width: 100%;
     height: 10px;
     cursor: ns-resize;
-    z-index: 4;
+    z-index: 1;
 }
 
 /* メッセージのスタイル */
-.chat-widget-message {
-    padding: 10px 16px;
-    border-radius: 18px;
-    max-width: 85%;
-    word-wrap: break-word;
-    line-height: 1.6;
-    margin-bottom: 12px;
-    /* Flexboxレイアウトのための追記 */
-    display: flex;
-    flex-direction: column;
-}
-.chat-widget-message.user-message {
-    background-color: #EFF6FF;
-    color: #1E40AF;
-    align-self: flex-end;
-    border-bottom-right-radius: 6px;
-}
-.chat-widget-message.bot-message {
-    background-color: #F3F4F6;
-    color: #1F2937;
-    align-self: flex-start;
-    border-bottom-left-radius: 6px;
-}
-.chat-widget-message p {
-    margin: 0;
-}
-.loading-message p {
-    opacity: 0.7;
-    font-style: italic;
-}
+.chat-widget-message { padding: 10px 16px; border-radius: 18px; max-width: 85%; word-wrap: break-word; line-height: 1.6; margin-bottom: 12px; }
+.chat-widget-message.user-message { background-color: #EFF6FF; color: #1E40AF; align-self: flex-end; border-bottom-right-radius: 6px; }
+.chat-widget-message.bot-message { background-color: #F3F4F6; color: #1F2937; align-self: flex-start; border-bottom-left-radius: 6px; }
+.chat-widget-message p { margin: 0; }
+.loading-message p { opacity: 0.7; font-style: italic; }
+.bot-message .dot { display: inline-block; animation: blink 1.4s infinite; animation-fill-mode: both; }
+.bot-message .dot:nth-of-type(2) { animation-delay: 0.2s; }
+.bot-message .dot:nth-of-type(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%, 80%, 100% { opacity: 0; } 40% { opacity: 1; } }
 
-/* 動的な思考中メッセージのスタイル */
-.bot-message .dot {
-    display: inline-block;
-    animation: blink 1.4s infinite;
-    animation-fill-mode: both;
-}
-.bot-message .dot:nth-of-type(2) {
-    animation-delay: 0.2s;
-}
-.bot-message .dot:nth-of-type(3) {
-    animation-delay: 0.4s;
-}
-@keyframes blink {
-    0%, 80%, 100% {
-        opacity: 0;
-    }
-    40% {
-        opacity: 1;
-    }
-}
-/* 回転アニメーションの定義 */
-@keyframes rotate-animation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* 新規ボタンのスタイルを調整 */
-#chat-widget-new-button {
-  /* アイコンを中央に配置するための設定 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* 見た目の微調整 */
-  padding: 5px;
-  line-height: 1;
-  width: 28px;  /* ボタンを正方形に近づける */
-  height: 28px;
-}
-
-/* アイコンにアニメーションを適用 */
-/*.new-chat-icon {
-  animation: rotate-animation 2s linear infinite;
-}*/
-
-/* wp-content/themes/kpi/css/chat-widget.css に追加 */
-
-/* chat-widget.css のスマホ用スタイル部分を置き換える */
-
-/* =============================================== */
-/* スマートフォン向けのスタイル（レスポンシブ対応） */
-/* =============================================== */
-
+/* スマホ表示用のフルスクリーンクラス */
 #chat-widget-container.fullscreen-widget {
-  /* !important をつけて、インラインスタイルよりも優先させる */
-  width: 100vw !important;
-  height: 100vh !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  border-radius: 0 !important;
-  max-height: 100vh !important;
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+    border-radius: 0 !important;
 }
-
 #chat-widget-container.fullscreen-widget #chat-widget-header {
-  border-top-left-radius: 0 !important;
-  border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
 }
