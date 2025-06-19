@@ -254,3 +254,35 @@
 /*.new-chat-icon {
   animation: rotate-animation 2s linear infinite;
 }*/
+
+/* wp-content/themes/kpi/css/chat-widget.css に追加 */
+
+/* =============================================== */
+/* スマートフォン向けのスタイル（レスポンシブ対応） */
+/* =============================================== */
+@media (max-width: 600px) {
+  #chat-widget-container {
+    /* 画面いっぱいに広げる */
+    width: 100%;
+    height: 100%;
+
+    /* 位置を画面の左上基点にリセット */
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
+
+    /* 角の丸みをなくす */
+    border-radius: 0;
+
+    /* 高さを固定する */
+    min-height: 100%;
+    max-height: 100%;
+  }
+
+  #chat-widget-header {
+    /* スマホ表示では角の丸みをなくす */
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
