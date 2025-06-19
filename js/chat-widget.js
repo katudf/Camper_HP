@@ -5,16 +5,13 @@ function initializeChatWidget() {
     if (window.chatWidgetInitialized) return;
     window.chatWidgetInitialized = true;
 
-    // APIサーバーのURL (早期に定義して全体で共有)
-    const SERVER_URL = 'https://camper-chatbot.onrender.com';
-
     // バージョン情報を非同期で取得して表示する
     async function fetchAndDisplayVersion() {
         try {
             const versionDisplay = document.getElementById('prompt-version-display');
             if (!versionDisplay) return;
 
-            const response = await fetch(`${SERVER_URL}/api/get_active_prompt_version`);
+            const response = await fetch('https://camper-chatbot.onrender.com/api/get_active_prompt_version');
             if (response.ok) {
                 const data = await response.json();
                 if (data.version) {
@@ -37,9 +34,23 @@ function initializeChatWidget() {
     const messagesContainer = document.getElementById('chat-widget-messages');
     const chatInput = document.getElementById('chat-widget-input');
     const sendButton = document.getElementById('chat-widget-send-button');
+    const SERVER_URL = 'https://camper-chatbot.onrender.com';
 
-    // ▼▼▼ 状態の保存・復元、メッセージ追加・削除の関数群をここに集約 ▼▼▼
+    // --- ★★★★★ ここからが新しいロジック ★★★★★ ---
 
+    // 画面幅に応じてフルスクリーンクラスを付け外しする関数
+    function checkViewport() {
+        if (window.innerWidth <= 600) {
+            chatContainer.classList.add('fullscreen-widget');
+        } else {
+            chatContainer.classList.remove('fullscreen-widget');
+        }
+    }
+
+    // ★★★★★ ウィンドウのリサイズ時にもチェックを実行 ★★★★★
+    window.addEventListener('resize', checkViewport);
+
+    // --- 状態の保存・復元、メッセージ追加・削除の関数群（変更なし） ---
     function saveState() {
         if (!chatContainer || !messagesContainer) return;
         
@@ -210,7 +221,11 @@ function initializeChatWidget() {
             chatContainer.style.left = 'auto';
             chatContainer.style.right = '20px';
             chatContainer.style.bottom = '20px';
-            chatContainer.style.height = '450px';
+            chatContainer.style.height = '600px'; // 高さを再設定
+            chatContainer.style.width = '370px'; // 幅を再設定
+
+            checkViewport(); // ★★★★★ 表示する前にビューポートをチェック ★★★★★
+
             if (chatContainer.classList.contains('hidden')) {
                 chatContainer.classList.remove('hidden');
             }
@@ -294,5 +309,6 @@ function initializeChatWidget() {
     if (sendButton) { sendButton.addEventListener('click', handleSendMessage); }
 
     // --- ★★★ 初期化実行 ★★★ ---
-    loadState(); 
+    loadState();
+    checkViewport(); // ★★★★★ 初期読み込み時にもチェックを実行 ★★★★★
 }

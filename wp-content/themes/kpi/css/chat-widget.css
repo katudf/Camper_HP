@@ -262,22 +262,21 @@
 /* =============================================== */
 /* スマートフォン向けのスタイル（レスポンシブ対応） */
 /* =============================================== */
-@media (max-width: 600px) {
-  #chat-widget-container {
-    /* !important を追加して、スタイルを強制的に適用する */
-    width: 100% !important;
-    height: 100% !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: auto !important;
-    bottom: auto !important;
-    border-radius: 0 !important;
-    min-height: 100% !important;
-    max-height: 100% !important;
-  }
+/* ================================== */
+/* スマホ表示用のフルスクリーンクラス */
+/* ================================== */
+#chat-widget-container.fullscreen-widget {
+    width: 100vw;  /* viewport width (画面の幅全体) */
+    height: 100vh; /* viewport height (画面の高さ全体) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;
+    max-height: 100vh;
+}
 
-  #chat-widget-header {
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-  }
+#chat-widget-container.fullscreen-widget #chat-widget-header {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
