@@ -251,6 +251,6 @@
 }
 
 /* アイコンにアニメーションを適用 */
-.new-chat-icon {
+/*.new-chat-icon {
   animation: rotate-animation 2s linear infinite;
-}
+}*/
