@@ -191,6 +191,18 @@ function initializeChatWidget() {
     // --- イベントリスナーの設定 ---
     if (toggleButton) {
         toggleButton.addEventListener('click', () => {
+            // チャットを開くときにビューポートを再チェック
+            checkViewport();
+            // スマホ表示ならインラインスタイルをリセット
+            if (window.innerWidth <= 600) {
+                chatContainer.style.top = '';
+                chatContainer.style.left = '';
+                chatContainer.style.right = '';
+                chatContainer.style.bottom = '';
+                chatContainer.style.height = '';
+                chatContainer.style.width = '';
+                chatContainer.style.inset = '';
+            }
             chatContainer.classList.toggle('hidden');
         });
     }
