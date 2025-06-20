@@ -17,13 +17,30 @@ function initializeChatWidget() {
     const sendButton = document.getElementById('chat-widget-send-button');
     const SERVER_URL = 'https://camper-chatbot.onrender.com';
 
+    let isDragging = false, isResizing = false;
+    let initialTop, initialLeft, initialHeight, initialMouseX, initialMouseY;
+    let userId = localStorage.getItem('chatbotUserId');
+    if (!userId) {
+        userId = `user_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+        localStorage.setItem('chatbotUserId', userId);
+    }
+    
     // --- メインロジック ---
 
-    // 画面幅に応じてフルスクリーン用のクラスを付け外しする
+    // 画面幅に応じてフルスクリーンクラスを付け外しする
     function checkViewport() {
         if (!chatContainer) return;
-        if (window.innerWidth <= 600) {
+        const isMobile = window.innerWidth <= 600;
+        
+        if (isMobile) {
             chatContainer.classList.add('fullscreen-widget');
+            // モバイル表示の際は、ドラッグで付与された可能性のあるインラインスタイルを削除
+            chatContainer.style.top = '';
+            chatContainer.style.left = '';
+            chatContainer.style.height = '';
+            chatContainer.style.width = '';
+            chatContainer.style.right = '';
+            chatContainer.style.bottom = '';
         } else {
             chatContainer.classList.remove('fullscreen-widget');
         }
@@ -59,8 +76,15 @@ function initializeChatWidget() {
                 isHTML: true
             };
         });
+        
         const state = {
             isHidden: chatContainer.classList.contains('hidden'),
+            position: {
+                right: chatContainer.style.right,
+                bottom: chatContainer.style.bottom,
+                height: chatContainer.style.height,
+                width: chatContainer.style.width
+            },
             messages: messagesToSave
         };
         sessionStorage.setItem('chatWidgetState', JSON.stringify(state));
@@ -81,6 +105,12 @@ function initializeChatWidget() {
         }
         if (chatContainer) {
             state.isHidden ? chatContainer.classList.add('hidden') : chatContainer.classList.remove('hidden');
+            if (state.position && !chatContainer.classList.contains('fullscreen-widget')) {
+                chatContainer.style.right = state.position.right || '20px';
+                chatContainer.style.bottom = state.position.bottom || '20px';
+                chatContainer.style.height = state.position.height || '600px';
+                chatContainer.style.width = state.position.width || '370px';
+            }
         }
     }
 
@@ -139,11 +169,6 @@ function initializeChatWidget() {
         }, 5000);
 
         try {
-            let userId = localStorage.getItem('chatbotUserId');
-            if (!userId) {
-                userId = `user_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
-                localStorage.setItem('chatbotUserId', userId);
-            }
             const response = await fetch(`${SERVER_URL}/api/chat`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -167,9 +192,6 @@ function initializeChatWidget() {
     if (toggleButton) {
         toggleButton.addEventListener('click', () => {
             chatContainer.classList.toggle('hidden');
-            if (!chatContainer.classList.contains('hidden')) {
-                checkViewport();
-            }
         });
     }
     if (widgetCloseButton) {
@@ -187,8 +209,58 @@ function initializeChatWidget() {
     }
     window.addEventListener('resize', checkViewport);
 
+    // --- ドラッグ＆リサイズのロジック ---
+    if (header) {
+        header.addEventListener('mousedown', (e) => {
+            // モバイル表示ではドラッグしない
+            if (chatContainer.classList.contains('fullscreen-widget')) return;
+            e.preventDefault(); isDragging = true;
+            const rect = chatContainer.getBoundingClientRect();
+            initialLeft = rect.left; initialTop = rect.top;
+            initialMouseX = e.clientX; initialMouseY = e.clientY;
+            document.body.style.userSelect = 'none';
+        });
+    }
+    if (resizeHandle) {
+        resizeHandle.addEventListener('mousedown', (e) => {
+            // モバイル表示ではリサイズしない
+            if (chatContainer.classList.contains('fullscreen-widget')) return;
+            e.preventDefault(); isResizing = true;
+            initialHeight = chatContainer.offsetHeight; initialMouseY = e.clientY;
+            document.body.style.userSelect = 'none';
+        });
+    }
+    window.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            const dx = e.clientX - initialMouseX; const dy = e.clientY - initialMouseY;
+            chatContainer.style.left = `${initialLeft + dx}px`;
+            chatContainer.style.top = `${initialTop + dy}px`;
+            chatContainer.style.right = 'auto';
+            chatContainer.style.bottom = 'auto';
+        }
+        if (isResizing) {
+            const dy = e.clientY - initialMouseY; const newHeight = initialHeight - dy;
+            const minHeight = 250; const maxHeight = window.innerHeight * 0.9;
+            if (newHeight >= minHeight && newHeight <= maxHeight) {
+                chatContainer.style.height = `${newHeight}px`;
+            }
+        }
+    });
+    window.addEventListener('mouseup', () => {
+        if (isDragging || isResizing) {
+            document.body.style.userSelect = '';
+            const rect = chatContainer.getBoundingClientRect();
+            chatContainer.style.right = `${window.innerWidth - rect.right}px`;
+            chatContainer.style.bottom = `${window.innerHeight - rect.bottom}px`;
+            chatContainer.style.top = 'auto';
+            chatContainer.style.left = 'auto';
+            isDragging = false; isResizing = false;
+            saveState();
+        }
+    });
+
     // --- 初期化実行 ---
-    loadState();
     checkViewport();
+    loadState();
     fetchAndDisplayVersion();
 }

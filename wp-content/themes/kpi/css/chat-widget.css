@@ -32,8 +32,9 @@
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     z-index: 10000;
-    display: flex; /* ★★★ Flexboxレイアウトに変更 ★★★ */
+    display: flex;
     flex-direction: column;
+    overflow: hidden; /* ★★★ overflow:hidden を追加 */
 }
 #chat-widget-container.hidden {
     display: none;
@@ -42,7 +43,7 @@
 /* ウィジェットヘッダー */
 #chat-widget-header {
     height: 65px;
-    flex-shrink: 0; /* ヘッダーは縮まないようにする */
+    flex-shrink: 0;
     background-color: #26ae10;
     color: white;
     padding: 5px 15px;
@@ -63,18 +64,18 @@
 #chat-widget-title {
     font-weight: bold;
 }
-#prompt-version-display,
-#chat-widget-disclaimer {
-    font-size: 10px;
-    font-weight: normal;
-    color: rgba(255, 255, 255, 0.8);
-}
 #prompt-version-display {
     position: absolute;
     bottom: 4px;
     left: 15px;
+    font-size: 10px;
+    font-weight: normal;
+    color: rgba(255, 255, 255, 0.8);
 }
 #chat-widget-disclaimer {
+    font-size: 10px;
+    font-weight: normal;
+    color: rgba(255, 255, 255, 0.8);
     margin-top: 4px;
     text-align: center;
 }
@@ -87,10 +88,9 @@
     background: none;
     border: 1px solid rgba(255, 255, 255, 0.7);
     color: white;
-    font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    padding: 4px 8px;
+    padding: 5px;
     line-height: 1;
     transition: background-color 0.2s;
     display: flex;
@@ -120,8 +120,8 @@
 
 /* メッセージ表示エリア */
 #chat-widget-messages {
-    flex-grow: 1; /* ★★★ 柔軟に高さを確保する ★★★ */
-    min-height: 0; /* ★★★ Flexboxでのスクロールに必須 ★★★ */
+    flex-grow: 1;
+    min-height: 0;
     padding: 15px;
     overflow-y: auto;
     background-color: #f9f9f9;
@@ -132,14 +132,12 @@
 /* メッセージ入力エリア */
 #chat-widget-input-container {
     height: 55px;
-    flex-shrink: 0; /* 入力欄は縮まないようにする */
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     padding: 0 10px;
     border-top: 1px solid #ddd;
     background-color: #fff;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
 }
 #chat-widget-input {
     flex-grow: 1;
@@ -189,11 +187,8 @@
     height: 100% !important;
     top: 0 !important;
     left: 0 !important;
-    right: auto !important;
-    bottom: auto !important;
+    right: 0 !important;
+    bottom: 0 !important;
     border-radius: 0 !important;
 }
-#chat-widget-container.fullscreen-widget #chat-widget-header {
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-}
+
