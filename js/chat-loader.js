@@ -23,7 +23,7 @@
 
         // 2. DOMPurifyライブラリの読み込み
         const purifyScript = document.createElement('script');
-        purifyScript.src = 'https://cdn.jsdelivr.net/npm/dompurify@3.0.0/dist/purify.min.js';
+        purifyScript.src = 'js/purify.min.js';
         
         // 5. チャットの動作ロジック（chat-widget.js）を読み込む
         purifyScript.onload = function() {
